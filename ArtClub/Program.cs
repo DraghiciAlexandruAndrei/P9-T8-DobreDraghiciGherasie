@@ -25,6 +25,8 @@ builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IFinanceService, FinanceService>();
 
+builder.Services.AddSession();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -39,6 +41,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseSession();
 
 // Ordinea contează: întâi Autentificare, apoi Autorizare
 app.UseAuthentication();
