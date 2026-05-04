@@ -1,0 +1,28 @@
+﻿@model ArtClub.Models.Entities.User
+
+@{
+    ViewData["Title"] = "Account details";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1>Account details</h1>
+        <p class="text-muted mb-0">Review user information, role, and status.</p>
+    </div>
+
+    <a asp-action="Index" class="btn btn-secondary">Back to accounts</a>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="h5">@Model.UserName</h2>
+
+        <p class="mb-1"><strong>Email:</strong> @Model.Email</p>
+        <p class="mb-1"><strong>Role:</strong> @Model.Role</p>
+        <p class="mb-0"><strong>Status:</strong> @(Model.IsActive ? "Active" : "Inactive")</p>
+    </div>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+<a asp-action="Index" class="btn btn-secondary">Back</a>
