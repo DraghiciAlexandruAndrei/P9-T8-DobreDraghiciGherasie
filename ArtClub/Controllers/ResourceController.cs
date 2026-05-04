@@ -1,52 +1,126 @@
-﻿using System.Collections.Generic;
+﻿using ArtClub.Models.Entities;
 using ArtClub.Models.ViewModels;
+using ArtClub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArtClub.Controllers
 {
     public class ResourceController : Controller
     {
-        public IActionResult Index()
+        private readonly IReservationService _reservationService;
+
+        public ResourceController(IReservationService reservationService)
         {
-            var model = new List<ResourceOverviewViewModel>
+            _reservationService = reservationService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var resources = await _reservationService.GetAllResourcesAsync();
+
+            var model = resources.Select(r => new ResourceOverviewViewModel
             {
-                new ResourceOverviewViewModel { Name = "Main Hall", Type = "Exhibition", Capacity = 120, Location = "Ground Floor", Status = "Reserved" },
-                new ResourceOverviewViewModel { Name = "Conference Room", Type = "Meeting", Capacity = 30, Location = "Second Floor", Status = "Available" },
-                new ResourceOverviewViewModel { Name = "Studio 2", Type = "Workshop", Capacity = 18, Location = "Annex Building", Status = "Unavailable" }
-            };
+                Name = r.Name,
+                Type = r.Description,
+                Capacity = r.Capacity,
+                Location = "Club venue",
+                Status = r.Reservations.Any(res =>
+                    res.StartTime.AddDays(-1) <= DateTime.Now &&
+                    res.EndTime.AddDays(1) >= DateTime.Now)
+                    ? "Reserved"
+                    : "Available"
+            }).ToList();
 
             return View(model);
         }
 
-        public IActionResult Calendar()
+        public async Task<IActionResult> Details(string name)
         {
-            return View();
+            var resource = await _reservationService.GetResourceByNameAsync(name);
+
+            if (resource == null)
+                return NotFound();
+
+            return View(resource);
         }
 
-        public IActionResult Create() => View();
+        public IActionResult Create()
+        {
+            return View(new ResourceCreateViewModel());
+        }
 
         [HttpPost]
-        public IActionResult Create(ResourceCreateViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ResourceCreateViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
-            TempData["StatusMessage"] = "Resource created.";
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var resource = new Resource
+            {
+                Name = model.Name,
+                Description = model.Type,
+                Capacity = model.Capacity,
+                BasePrice = 0
+            };
+
+            await _reservationService.CreateResourceAsync(resource);
+
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Edit(int id) => View();
+        public async Task<IActionResult> Edit(string name)
+        {
+            var resource = await _reservationService.GetResourceByNameAsync(name);
+
+            if (resource == null)
+                return NotFound();
+
+            return View(resource);
+        }
 
         [HttpPost]
-        public IActionResult Edit(int id, ResourceCreateViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string originalName, Resource model)
         {
-            if (!ModelState.IsValid) return View(model);
-            TempData["StatusMessage"] = "Resource updated.";
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var success = await _reservationService.UpdateResourceAsync(originalName, model);
+
+            if (!success)
+                return NotFound();
+
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(string name)
         {
-            TempData["StatusMessage"] = "Resource removed.";
+            var resource = await _reservationService.GetResourceByNameAsync(name);
+
+            if (resource == null)
+                return NotFound();
+
+            return View(resource);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string name)
+        {
+            var success = await _reservationService.DeleteResourceAsync(name);
+
+            if (!success)
+                return NotFound();
+
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Calendar()
+        {
+            var reservations = await _reservationService.GetReservationCalendarAsync();
+
+            return View(reservations);
         }
     }
 }

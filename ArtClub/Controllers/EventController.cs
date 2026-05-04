@@ -1,68 +1,259 @@
-﻿using System.Collections.Generic;
+﻿using ArtClub.Models.Entities;
 using ArtClub.Models.ViewModels;
+using ArtClub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ArtClub.Controllers
 {
     public class EventController : Controller
     {
-        public IActionResult Index()
+        private readonly IEventService _eventService;
+        private readonly IArtPieceService _artPieceService;
+
+        public EventController(
+            IEventService eventService,
+            IArtPieceService artPieceService)
         {
-            var model = new List<EventSummaryViewModel>
+            _eventService = eventService;
+            _artPieceService = artPieceService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var events = await _eventService.GetAllEventsAsync();
+
+            var model = events.Select(e => new EventSummaryViewModel
             {
-                new EventSummaryViewModel { Title = "Spring Exhibition", OrganizerName = "Lorena Dobre", ResourceName = "Main Hall", Status = "Scheduled", StartDate = DateTime.Today.AddDays(7), InviteCount = 14 },
-                new EventSummaryViewModel { Title = "Watercolor Workshop", OrganizerName = "Alexandru Draghici", ResourceName = "Studio 2", Status = "Pending", StartDate = DateTime.Today.AddDays(14), InviteCount = 9 },
-                new EventSummaryViewModel { Title = "Art Talk", OrganizerName = "Gabriel Gherasie", ResourceName = "Conference Room", Status = "Confirmed", StartDate = DateTime.Today.AddDays(21), InviteCount = 18 }
-            };
+                Title = e.Title,
+                OrganizerName = e.Organizer != null ? e.Organizer.UserName : "Unknown organizer",
+                ResourceName = e.Resource != null ? e.Resource.Name : "No resource",
+                Status = e.Reservation != null && e.Reservation.StartTime > DateTime.Now
+                    ? "Scheduled"
+                    : "Completed",
+                StartDate = e.Reservation != null ? e.Reservation.StartTime : DateTime.Now,
+                InviteCount = e.Invitations != null ? e.Invitations.Count : 0
+            }).ToList();
 
             return View(model);
         }
 
-        public IActionResult Create() => View();
+        public async Task<IActionResult> Create()
+        {
+            var start = DateTime.Now.AddDays(1);
+            start = new DateTime(start.Year, start.Month, start.Day, 10, 0, 0);
+
+            // Luăm resursele din repository
+            var resources = await _eventService.GetAllResourcesAsync(); // Asigură-te că ai această metodă în Service
+
+            var model = new EventCreateViewModel
+            {
+                StartDate = start,
+                EndDate = start.AddHours(2),
+                AvailableResources = resources.Select(r => new SelectListItem
+                {
+                    Value = r.Name,
+                    Text = r.Name
+                }).ToList()
+            };
+
+            return View(model);
+        }
 
         [HttpPost]
-        public IActionResult Create(EventCreateViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(EventCreateViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
-            TempData["StatusMessage"] = "Event created and linked to a reserved resource.";
-            return RedirectToAction(nameof(Details), new { id = 1 });
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var organizerId = HttpContext.Session.GetInt32("UserId");
+            if (organizerId == null)
+            {
+                ModelState.AddModelError("", "Trebuie să fii autentificat pentru a crea un eveniment.");
+                return View(model);
+            }
+
+            var resource = await _eventService.GetResourceByNameAsync(model.ResourceName);
+            if (resource == null)
+            {
+                ModelState.AddModelError("ResourceName", "Resursa (sala) nu a fost găsită.");
+                return View(model);
+            }
+
+            // Creăm obiectul Eveniment
+            var ev = new Event
+            {
+                Title = model.Title,
+                Description = model.Description,
+                ResourceId = resource.Id,
+                OrganizerId = organizerId.Value,
+                Budget = 0, // Setat la 0 pentru a trece de verificarea de buget dacă soldul e 0
+                Reservation = new Reservation
+                {
+                    ResourceId = resource.Id,
+                    StartTime = model.StartDate,
+                    EndTime = model.EndDate
+                }
+            };
+
+            try
+            {
+                var success = await _eventService.CreateEventAsync(ev);
+
+                if (!success)
+                {
+                    // Mesaj specific pentru TC-001 (Documentația de testare)
+                    ModelState.AddModelError("", "Eșec la salvare: Verifică dacă sala este disponibilă (există buffer de 1 zi) sau dacă bugetul este suficient.");
+                    return View(model);
+                }
+
+                TempData["StatusMessage"] = "Evenimentul a fost creat cu succes!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Eroare de sistem la salvarea în baza de date: " + ex.Message);
+                return View(model);
+            }
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(string title)
         {
+            if (string.IsNullOrWhiteSpace(title))
+                return NotFound();
+
+            var ev = await _eventService.GetEventByTitleAsync(title);
+
+            if (ev == null)
+                return NotFound();
+
             var model = new EventDetailsViewModel
             {
-                EventId = id,
-                Title = "Spring Exhibition",
-                OrganizerName = "Lorena Dobre",
-                ResourceName = "Main Hall",
-                Date = DateTime.Today.AddDays(7),
-                ArtPieceNames = new List<string> { "Sunlit Studio", "Modern Shapes" },
-                AttendingCount = 14
+                EventId = ev.Id,
+                Title = ev.Title,
+                OrganizerName = ev.Organizer != null ? ev.Organizer.UserName : "Unknown organizer",
+                ResourceName = ev.Resource != null ? ev.Resource.Name : "No resource",
+                Date = ev.Reservation != null ? ev.Reservation.StartTime : DateTime.Now,
+                AttendingCount = ev.Invitations != null ? ev.Invitations.Count : 0,
+                ArtPieceNames = new List<string>()
             };
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Edit(string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                return NotFound();
+
+            var ev = await _eventService.GetEventByTitleAsync(title);
+
+            if (ev == null)
+                return NotFound();
+
+            ViewBag.OriginalTitle = ev.Title;
+
+            var model = new EventCreateViewModel
+            {
+                Title = ev.Title,
+                Description = ev.Description,
+                StartDate = ev.Reservation != null ? ev.Reservation.StartTime : DateTime.Now,
+                EndDate = ev.Reservation != null ? ev.Reservation.EndTime : DateTime.Now.AddHours(1),
+                SelectedResourceId = ev.ResourceId,
+                ResourceName = ev.Resource != null ? ev.Resource.Name : ""
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string originalTitle, EventCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.OriginalTitle = originalTitle;
+                return View(model);
+            }
+
+            var resource = await _eventService.GetResourceByNameAsync(model.ResourceName);
+
+            if (resource == null)
+            {
+                ViewBag.OriginalTitle = originalTitle;
+                ModelState.AddModelError("ResourceName", "Resource not found.");
+                return View(model);
+            }
+
+            var ev = new Event
+            {
+                Title = model.Title,
+                Description = model.Description,
+                ResourceId = resource.Id,
+
+                Reservation = new Reservation
+                {
+                    ResourceId = resource.Id,
+                    StartTime = model.StartDate,
+                    EndTime = model.EndDate
+                }
+            };
+
+            var success = await _eventService.UpdateEventAsync(originalTitle, ev);
+
+            if (!success)
+                return NotFound();
+
+            TempData["StatusMessage"] = "Event updated successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                return NotFound();
+
+            var ev = await _eventService.GetEventByTitleAsync(title);
+
+            if (ev == null)
+                return NotFound();
+
+            var model = new EventDetailsViewModel
+            {
+                EventId = ev.Id,
+                Title = ev.Title,
+                OrganizerName = ev.Organizer != null ? ev.Organizer.UserName : "Unknown organizer",
+                ResourceName = ev.Resource != null ? ev.Resource.Name : "No resource",
+                Date = ev.Reservation != null ? ev.Reservation.StartTime : DateTime.Now,
+                AttendingCount = ev.Invitations != null ? ev.Invitations.Count : 0
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string title)
+        {
+            var success = await _eventService.DeleteEventByTitleAsync(title);
+
+            if (!success)
+                return NotFound();
+
+            TempData["StatusMessage"] = "Event deleted successfully.";
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Inbox()
         {
-            var model = new List<InvitationInboxViewModel>
-            {
-                new InvitationInboxViewModel { EventTitle = "Spring Exhibition", SenderName = "Lorena Dobre", Status = "Pending", SentAt = DateTime.Today.AddDays(-1) },
-                new InvitationInboxViewModel { EventTitle = "Art Talk", SenderName = "Gabriel Gherasie", Status = "Accepted", SentAt = DateTime.Today.AddDays(-2) },
-                new InvitationInboxViewModel { EventTitle = "Watercolor Workshop", SenderName = "Alexandru Draghici", Status = "Declined", SentAt = DateTime.Today.AddDays(-3) }
-            };
-
+            var model = new List<InvitationInboxViewModel>();
             return View(model);
         }
 
-        public IActionResult Edit(int id) => View();
-
-        public IActionResult Delete(int id) => View();
-
-        public IActionResult Cancel(int id)
+        public async Task<IActionResult> Cancel(int id)
         {
-            TempData["StatusMessage"] = "Event cancellation completed.";
+            await _eventService.CancelEventAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }
