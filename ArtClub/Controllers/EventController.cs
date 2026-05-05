@@ -1,9 +1,10 @@
 ﻿using ArtClub.Models.Entities;
+using ArtClub.Models.Enums;
 using ArtClub.Models.ViewModels;
 using ArtClub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using ArtClub.Attributes; 
 namespace ArtClub.Controllers
 {
     public class EventController : Controller
@@ -38,6 +39,8 @@ namespace ArtClub.Controllers
             return View(model);
         }
 
+   
+        
         public async Task<IActionResult> Create()
         {
             var start = DateTime.Now.AddDays(1);
@@ -62,6 +65,7 @@ namespace ArtClub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRole(UserRole.Member)]
         public async Task<IActionResult> Create(EventCreateViewModel model)
         {
             if (!ModelState.IsValid)
