@@ -1,4 +1,5 @@
 ﻿using ArtClub.DataAccess.Interfaces;
+using ArtClub.DataAccess.Repositories;
 using ArtClub.Models.Entities;
 using ArtClub.Models.Enums;
 using ArtClub.Services.Interfaces;
@@ -30,61 +31,73 @@ namespace ArtClub.Services.Implementations
 
         public async Task<bool> CreateEventAsync(Event model)
         {
-            // 1. Validare obiect primire
             if (model == null || model.Reservation == null) return false;
 
-            // 2. Verificăm disponibilitatea resursei (SALA)
-            // Dacă aici se întoarce false, înseamnă că buffer-ul de 1 zi blochează data aleasă.
-            var isAvailable = await _reservationService.CheckAvailabilityAsync(
-                model.ResourceId,
-                model.Reservation.StartTime,
-                model.Reservation.EndTime);
+            // 1. Verificăm limita de evenimente (REQ-5)
+            // Schimbare: Nu mai facem cast la Member, folosim clasa User direct
+            var user = await _userRepo.GetByIdAsync(model.OrganizerId);
+            if (user == null) return false;
 
-            if (!isAvailable) return false;
+            var currentEvents = await _eventRepo.GetAllWithDetailsAsync();
+            var organizerEventsCount = currentEvents.Count(e => e.OrganizerId == model.OrganizerId);
 
-            // 3. Verificăm bugetul clubului
-            // Dacă suma veniturilor din Payments este mai mică decât model.Budget, se va întoarce false.
-            var hasFunds = await _financeService.HasClubSufficientFundsAsync(model.Budget);
-            if (!hasFunds) return false;
+            // Folosim proprietatea EventCreationLimit mutată în clasa User
+            if (organizerEventsCount >= user.EventCreationLimit) return false;
+
+            // 2. Calculăm costul estimat
+            int artCount = model.EventArtPieces?.Count ?? 0;
+            int days = (model.Reservation.EndTime - model.Reservation.StartTime).Days;
+            if (days <= 0) days = 1;
+
+            model.Budget = (days * 300) + (days * artCount * 200);
 
             try
             {
-                // 4. Salvare prin Repository
-                // Repository-ul tău folosește _context.AddAsync(artEvent) care urmărește și Rezervarea atașată.
                 await _eventRepo.AddAsync(model);
                 var success = await _eventRepo.SaveChangesAsync();
 
-                // 5. Notificare automată (fără a bloca return-ul dacă eșuează mail-ul)
                 if (success)
                 {
-                    try
-                    {
-                        var organizer = await _userRepo.GetByIdAsync(model.OrganizerId);
-                        if (organizer != null)
-                        {
-                            await _notificationService.SendEmailAsync(
-                                organizer.Email,
-                                "Eveniment Creat",
-                                $"Evenimentul '{model.Title}' a fost aprobat și înregistrat.");
-                        }
-                    }
-                    catch
-                    {
-                        // Log eroare email, dar lăsăm success = true pentru că în DB s-a salvat
-                    }
+                    await _notificationService.SendEmailAsync(user.Email, "Eveniment Creat",
+                        $"Evenimentul '{model.Title}' a fost creat. Cost estimat: {model.Budget} lei.");
                 }
-
                 return success;
             }
-            catch (Exception ex)
-            {
-                // Aici prinzi erori de Foreign Key sau Database Constraints
-                // Poți pune un breakpoint aici să vezi ex.Message
-                return false;
-            }
+            catch { return false; }
         }
 
-        // Restul metodelor rămân la fel, fiind deja corect implementate pentru Repository
+        public async Task<bool> UpdateEventAsync(string originalTitle, Event model)
+        {
+            var ev = await _eventRepo.GetByTitleWithDetailsAsync(originalTitle);
+            if (ev == null) return false;
+
+            ev.Title = model.Title;
+            ev.Description = model.Description;
+            ev.ResourceId = model.ResourceId;
+
+            if (ev.Reservation != null && model.Reservation != null)
+            {
+                ev.Reservation.ResourceId = model.Reservation.ResourceId;
+                ev.Reservation.StartTime = model.Reservation.StartTime;
+                ev.Reservation.EndTime = model.Reservation.EndTime;
+            }
+
+            if (model.EventArtPieces != null)
+            {
+                ev.EventArtPieces = model.EventArtPieces;
+            }
+
+            // Recalculăm bugetul
+            int artCount = ev.EventArtPieces?.Count ?? 0;
+            int days = (ev.Reservation.EndTime - ev.Reservation.StartTime).Days;
+            if (days <= 0) days = 1;
+            ev.Budget = (days * 300) + (days * artCount * 200);
+
+            return await _eventRepo.SaveChangesAsync();
+        }
+
+        // --- Metodele de suport rămase intacte, dar folosind clasa User ---
+
         public async Task<bool> CancelEventAsync(int eventId)
         {
             var eventToDelete = await _eventRepo.GetByIdWithReservationAsync(eventId);
@@ -107,25 +120,6 @@ namespace ArtClub.Services.Implementations
         public async Task<Resource?> GetResourceByNameAsync(string resourceName)
         {
             return await _eventRepo.GetResourceByNameAsync(resourceName);
-        }
-
-        public async Task<bool> UpdateEventAsync(string originalTitle, Event model)
-        {
-            var ev = await _eventRepo.GetByTitleWithDetailsAsync(originalTitle);
-            if (ev == null) return false;
-
-            ev.Title = model.Title;
-            ev.Description = model.Description;
-            ev.ResourceId = model.ResourceId;
-
-            if (ev.Reservation != null && model.Reservation != null)
-            {
-                ev.Reservation.ResourceId = model.Reservation.ResourceId;
-                ev.Reservation.StartTime = model.Reservation.StartTime;
-                ev.Reservation.EndTime = model.Reservation.EndTime;
-            }
-
-            return await _eventRepo.SaveChangesAsync();
         }
 
         public async Task<bool> DeleteEventByTitleAsync(string title)
@@ -164,21 +158,24 @@ namespace ArtClub.Services.Implementations
         {
             return await _eventRepo.GetFirstUserIdAsync();
         }
+
         public async Task<List<Resource>> GetAllResourcesAsync()
         {
-            return await _eventRepo.GetAllResourcesAsync(); // Trebuie să existe în IEventRepository
-
+            return await _eventRepo.GetAllResourcesAsync();
         }
+
+
         public async Task<List<User>> GetAllMembersAsync()
         {
-            // Presupunând că IUserRepository are o metodă GetAllAsync sau similară
             var users = await _userRepo.GetAllOrderedByNameAsync();
-
-            // Putem filtra aici membrii dacă repository-ul returnează tot
-            return users
-                .Where(u => u.Role == UserRole.Member)
-                .ToList();
+            // Filtrăm după rolul din clasa User
+            return users.Where(u => u.Role == UserRole.Member).ToList();
+        }
+        // EventService.cs
+        public async Task<List<Event>> GetEventsByOrganizerIdAsync(string userId)
+        {
+            // Service-ul doar cere datele de la repository
+            return await _eventRepo.GetByOrganizerIdAsync(userId);
         }
     }
-
 }
