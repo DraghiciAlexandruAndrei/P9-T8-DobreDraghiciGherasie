@@ -27,7 +27,8 @@
                         <h2 class="h5">@resource.Name</h2>
 
                         <p class="mb-1"><strong>Type:</strong> @resource.Type</p>
-                        <p class="mb-1"><strong>Capacity:</strong> @resource.Capacity</p>
+                        <p class="mb-1"><strong>Capacity:</strong> @(resource.Capacity?.ToString() ?? "N/A")</p>
+                        <p class="mb-1"><strong>Quantity:</strong> @resource.QuantityAvailable</p>
                         <p class="mb-1"><strong>Location:</strong> @resource.Location</p>
 
                         <p class="mb-3">

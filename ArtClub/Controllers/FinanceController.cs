@@ -175,6 +175,40 @@ namespace ArtClub.Controllers
             return RedirectToAction(nameof(Payments));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Pay(int eventId, decimal amount)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                TempData["ErrorMessage"] = "You must be logged in to pay for an event.";
+                return RedirectToAction("Index", "Event");
+            }
+
+            if (amount <= 0)
+            {
+                TempData["ErrorMessage"] = "Invalid payment amount.";
+                return RedirectToAction("Details", "Event", new { id = eventId });
+            }
+
+            var payment = new Payment
+            {
+                UserId = userId.Value,
+                Amount = amount,
+                Date = DateTime.Now,
+                IsIncome = true,
+                Type = PaymentType.Booking,
+                Description = $"Plată eveniment ID: {eventId}"
+            };
+
+            await _financeService.CreatePaymentAsync(payment);
+            await _financeService.RegisterEventExpensesAsync(eventId, amount);
+
+            TempData["StatusMessage"] = "Payment completed successfully.";
+            return RedirectToAction("Details", "Event", new { id = eventId });
+        }
+
         public async Task<IActionResult> GenerateReport(int month, int year)
         {
             var report = await _financeService.GenerateMonthlyReportAsync(month, year);

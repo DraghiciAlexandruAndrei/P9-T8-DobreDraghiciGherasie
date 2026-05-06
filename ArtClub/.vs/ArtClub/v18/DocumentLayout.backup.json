@@ -1,0 +1,1030 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\VS repo\\ArtClub\\ArtClub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\controllers\\resourcecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:controllers\\resourcecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\viewmodels\\resourceoverviewviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\viewmodels\\resourceoverviewviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\viewmodels\\resourcecreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\viewmodels\\resourcecreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\data\\interfaces\\iartpiecerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:data\\interfaces\\iartpiecerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\data\\repository\\artpiecerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:data\\repository\\artpiecerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\data\\interfaces\\ieventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:data\\interfaces\\ieventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\data\\repository\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:data\\repository\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\viewmodels\\artpiecedetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\viewmodels\\artpiecedetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\viewmodels\\artpiecelistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\viewmodels\\artpiecelistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\viewmodels\\eventdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\viewmodels\\eventdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\viewmodels\\eventcreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\viewmodels\\eventcreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\views\\event\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:views\\event\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\eventartpiece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\eventartpiece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\enums\\resourcetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\enums\\resourcetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\services\\implementations\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:services\\implementations\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\services\\interfaces\\ieventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:services\\interfaces\\ieventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\invitation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\invitation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\data\\repository\\invitationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:data\\repository\\invitationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\data\\interfaces\\iinvitationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:data\\interfaces\\iinvitationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\services\\implementations\\invitationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:services\\implementations\\invitationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\services\\interfaces\\iinvitationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:services\\interfaces\\iinvitationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\controllers\\invitationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:controllers\\invitationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\controllers\\invitationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:controllers\\invitationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\controllers\\financecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:controllers\\financecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\resourceattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\resourceattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\resource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\resource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\artpiece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\artpiece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\dataacess\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:dataacess\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\enums\\eventstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\enums\\eventstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\enums\\paymentstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\enums\\paymentstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\enums\\paymenttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\enums\\paymenttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\enums\\notificationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\enums\\notificationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\enums\\invitationstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\enums\\invitationstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\monthlyfinancialsummary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\monthlyfinancialsummary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\notificationpreferences.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\notificationpreferences.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\models\\entities\\auditlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:models\\entities\\auditlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\services\\interfaces\\ifinanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:services\\interfaces\\ifinanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\data\\interfaces\\ipaymentrepository.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:data\\interfaces\\ipaymentrepository.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\data\\repository\\paymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:data\\repository\\paymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\services\\implementations\\financeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:services\\implementations\\financeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VS repo\\ArtClub\\ArtClub\\QUICK_REFERENCE.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:QUICK_REFERENCE.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VS repo\\ArtClub\\ArtClub\\PHASE_2_IMPLEMENTATION_SUMMARY.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PHASE_2_IMPLEMENTATION_SUMMARY.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VS repo\\ArtClub\\ArtClub\\IMMEDIATE_DASHBOARD_FIX.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:IMMEDIATE_DASHBOARD_FIX.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VS repo\\ArtClub\\ArtClub\\EXECUTIVE_SUMMARY.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EXECUTIVE_SUMMARY.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VS repo\\ArtClub\\ArtClub\\DOCUMENTATION_INDEX.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DOCUMENTATION_INDEX.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VS repo\\ArtClub\\ArtClub\\COMPREHENSIVE_IMPLEMENTATION_ANALYSIS.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:COMPREHENSIVE_IMPLEMENTATION_ANALYSIS.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\controllers\\memberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:controllers\\memberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\views\\resource\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:views\\resource\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\views\\event\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:views\\event\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\services\\implementations\\reservationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:services\\implementations\\reservationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\views\\resource\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:views\\resource\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\views\\resource\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:views\\resource\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\views\\resource\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:views\\resource\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|d:\\vs repo\\artclub\\artclub\\views\\event\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3A06D862-2FE9-22CD-874E-E6F6BC90ED99}|ArtClub.csproj|solutionrelative:views\\event\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IArtPieceRepository.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Interfaces\\IArtPieceRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Interfaces\\IArtPieceRepository.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Interfaces\\IArtPieceRepository.cs",
+              "RelativeToolTip": "Data\\Interfaces\\IArtPieceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T19:39:21.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ResourceController.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\ResourceController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ResourceController.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\ResourceController.cs",
+              "RelativeToolTip": "Controllers\\ResourceController.cs",
+              "ViewState": "AgIAAAQBAAAAAAAAAAAYwBIBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:32:20.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ResourceCreateViewModel.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\ResourceCreateViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\ResourceCreateViewModel.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\ResourceCreateViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\ResourceCreateViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T18:04:24.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ResourceOverviewViewModel.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\ResourceOverviewViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\ResourceOverviewViewModel.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\ResourceOverviewViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\ResourceOverviewViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T18:04:36.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ArtPieceRepository.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Repository\\ArtPieceRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repository\\ArtPieceRepository.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Repository\\ArtPieceRepository.cs",
+              "RelativeToolTip": "Data\\Repository\\ArtPieceRepository.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAYwDsAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T19:30:19.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IEventRepository.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Interfaces\\IEventRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Interfaces\\IEventRepository.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Interfaces\\IEventRepository.cs",
+              "RelativeToolTip": "Data\\Interfaces\\IEventRepository.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:46:44.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EventRepository.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Repository\\EventRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repository\\EventRepository.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Repository\\EventRepository.cs",
+              "RelativeToolTip": "Data\\Repository\\EventRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAnwBYAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:45:57.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ArtPieceDetailsViewModel.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\ArtPieceDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\ArtPieceDetailsViewModel.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\ArtPieceDetailsViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\ArtPieceDetailsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T19:36:46.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ArtPieceListViewModel.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\ArtPieceListViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\ArtPieceListViewModel.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\ArtPieceListViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\ArtPieceListViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T19:36:44.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "EventCreateViewModel.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\EventCreateViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\EventCreateViewModel.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\EventCreateViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\EventCreateViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T19:30:44.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Event\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Event\\Edit.cshtml",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Event\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Event\\Edit.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAvwEAAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-06T18:22:55.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EventDetailsViewModel.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\EventDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\EventDetailsViewModel.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\ViewModels\\EventDetailsViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\EventDetailsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T18:39:44.05Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "EventArtPiece.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\EventArtPiece.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\EventArtPiece.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\EventArtPiece.cs",
+              "RelativeToolTip": "Models\\Entities\\EventArtPiece.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T18:43:54.653Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Event\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Event\\Details.cshtml",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Event\\Details.cshtml",
+              "RelativeToolTip": "Views\\Event\\Details.cshtml",
+              "ViewState": "AgIAADYAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-06T18:39:59.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:16:34.287Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ResourceType.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\ResourceType.cs",
+              "RelativeDocumentMoniker": "Models\\Enums\\ResourceType.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\ResourceType.cs",
+              "RelativeToolTip": "Models\\Enums\\ResourceType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:31:19.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Resource\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Resource\\Edit.cshtml",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Resource\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Resource\\Edit.cshtml",
+              "ViewState": "AgIAAHUAAAAAAAAAAABBwAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-06T18:19:38.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Resource\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Resource\\Details.cshtml",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Resource\\Details.cshtml",
+              "RelativeToolTip": "Views\\Resource\\Details.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-06T18:20:18.356Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Resource\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Resource\\Index.cshtml",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Resource\\Index.cshtml",
+              "RelativeToolTip": "Views\\Resource\\Index.cshtml",
+              "ViewState": "AgIAAB8AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-06T18:20:09.566Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "ReservationService.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Implementations\\ReservationService.cs",
+              "RelativeDocumentMoniker": "Services\\Implementations\\ReservationService.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Implementations\\ReservationService.cs",
+              "RelativeToolTip": "Services\\Implementations\\ReservationService.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T18:19:27.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Event\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Event\\Create.cshtml",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Event\\Create.cshtml",
+              "RelativeToolTip": "Views\\Event\\Create.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-06T18:19:18.302Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Resource\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Resource\\Create.cshtml",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Views\\Resource\\Create.cshtml",
+              "RelativeToolTip": "Views\\Resource\\Create.cshtml",
+              "ViewState": "AgIAAHgAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-06T18:19:11.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "QUICK_REFERENCE.md",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\QUICK_REFERENCE.md",
+              "RelativeDocumentMoniker": "QUICK_REFERENCE.md",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\QUICK_REFERENCE.md",
+              "RelativeToolTip": "QUICK_REFERENCE.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALkBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-06T13:25:52.712Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "MembersController.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\MembersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MembersController.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\MembersController.cs",
+              "RelativeToolTip": "Controllers\\MembersController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T17:22:47.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "FinanceService.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Implementations\\FinanceService.cs",
+              "RelativeDocumentMoniker": "Services\\Implementations\\FinanceService.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Implementations\\FinanceService.cs",
+              "RelativeToolTip": "Services\\Implementations\\FinanceService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:43:55.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "PaymentRepository.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Repository\\PaymentRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repository\\PaymentRepository.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Repository\\PaymentRepository.cs",
+              "RelativeToolTip": "Data\\Repository\\PaymentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAEBVwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:43:24.349Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "IPaymentRepository.cs.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Interfaces\\IPaymentRepository.cs.cs",
+              "RelativeDocumentMoniker": "Data\\Interfaces\\IPaymentRepository.cs.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Interfaces\\IPaymentRepository.cs.cs",
+              "RelativeToolTip": "Data\\Interfaces\\IPaymentRepository.cs.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA+wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:43:04.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "IFinanceService.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Interfaces\\IFinanceService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\IFinanceService.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Interfaces\\IFinanceService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\IFinanceService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA+wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:42:29.636Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "PHASE_2_IMPLEMENTATION_SUMMARY.md",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\PHASE_2_IMPLEMENTATION_SUMMARY.md",
+              "RelativeDocumentMoniker": "PHASE_2_IMPLEMENTATION_SUMMARY.md",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\PHASE_2_IMPLEMENTATION_SUMMARY.md",
+              "RelativeToolTip": "PHASE_2_IMPLEMENTATION_SUMMARY.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-06T13:39:46.097Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "AuditLog.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\AuditLog.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\AuditLog.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\AuditLog.cs",
+              "RelativeToolTip": "Models\\Entities\\AuditLog.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAIBIwC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:34:26.002Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "NotificationPreferences.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\NotificationPreferences.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\NotificationPreferences.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\NotificationPreferences.cs",
+              "RelativeToolTip": "Models\\Entities\\NotificationPreferences.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:34:19.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Notification.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\Notification.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Notification.cs",
+              "RelativeToolTip": "Models\\Entities\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:34:11.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "MonthlyFinancialSummary.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\MonthlyFinancialSummary.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\MonthlyFinancialSummary.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\MonthlyFinancialSummary.cs",
+              "RelativeToolTip": "Models\\Entities\\MonthlyFinancialSummary.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:34:04.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "InvitationStatus.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\InvitationStatus.cs",
+              "RelativeDocumentMoniker": "Models\\Enums\\InvitationStatus.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\InvitationStatus.cs",
+              "RelativeToolTip": "Models\\Enums\\InvitationStatus.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAIBQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:33:51.055Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "NotificationType.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\NotificationType.cs",
+              "RelativeDocumentMoniker": "Models\\Enums\\NotificationType.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\NotificationType.cs",
+              "RelativeToolTip": "Models\\Enums\\NotificationType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:33:45.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "PaymentType.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\PaymentType.cs",
+              "RelativeDocumentMoniker": "Models\\Enums\\PaymentType.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\PaymentType.cs",
+              "RelativeToolTip": "Models\\Enums\\PaymentType.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAIBQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:33:35.043Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "PaymentStatus.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\PaymentStatus.cs",
+              "RelativeDocumentMoniker": "Models\\Enums\\PaymentStatus.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\PaymentStatus.cs",
+              "RelativeToolTip": "Models\\Enums\\PaymentStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:33:30.777Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "EventStatus.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\EventStatus.cs",
+              "RelativeDocumentMoniker": "Models\\Enums\\EventStatus.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Enums\\EventStatus.cs",
+              "RelativeToolTip": "Models\\Enums\\EventStatus.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAIBQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:33:19.943Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\DataAcess\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "DataAcess\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\DataAcess\\ApplicationDbContext.cs",
+              "RelativeToolTip": "DataAcess\\ApplicationDbContext.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:31:59.87Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ArtPiece.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\ArtPiece.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\ArtPiece.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\ArtPiece.cs",
+              "RelativeToolTip": "Models\\Entities\\ArtPiece.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIBJwAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:31:47.508Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Resource.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Resource.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\Resource.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Resource.cs",
+              "RelativeToolTip": "Models\\Entities\\Resource.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAIBIwAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:31:39.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "ResourceAttribute.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\ResourceAttribute.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\ResourceAttribute.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\ResourceAttribute.cs",
+              "RelativeToolTip": "Models\\Entities\\ResourceAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:31:26.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "IMMEDIATE_DASHBOARD_FIX.md",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\IMMEDIATE_DASHBOARD_FIX.md",
+              "RelativeDocumentMoniker": "IMMEDIATE_DASHBOARD_FIX.md",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\IMMEDIATE_DASHBOARD_FIX.md",
+              "RelativeToolTip": "IMMEDIATE_DASHBOARD_FIX.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-06T13:24:33.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "EXECUTIVE_SUMMARY.md",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\EXECUTIVE_SUMMARY.md",
+              "RelativeDocumentMoniker": "EXECUTIVE_SUMMARY.md",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\EXECUTIVE_SUMMARY.md",
+              "RelativeToolTip": "EXECUTIVE_SUMMARY.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-06T13:27:02.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "DOCUMENTATION_INDEX.md",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\DOCUMENTATION_INDEX.md",
+              "RelativeDocumentMoniker": "DOCUMENTATION_INDEX.md",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\DOCUMENTATION_INDEX.md",
+              "RelativeToolTip": "DOCUMENTATION_INDEX.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-06T13:27:35.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "COMPREHENSIVE_IMPLEMENTATION_ANALYSIS.md",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\COMPREHENSIVE_IMPLEMENTATION_ANALYSIS.md",
+              "RelativeDocumentMoniker": "COMPREHENSIVE_IMPLEMENTATION_ANALYSIS.md",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\COMPREHENSIVE_IMPLEMENTATION_ANALYSIS.md",
+              "RelativeToolTip": "COMPREHENSIVE_IMPLEMENTATION_ANALYSIS.md",
+              "ViewState": "AgIAABwCAAAAAAAAAAAAABgAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-06T13:24:12.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "InvitationService.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Implementations\\InvitationService.cs",
+              "RelativeDocumentMoniker": "Services\\Implementations\\InvitationService.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Implementations\\InvitationService.cs",
+              "RelativeToolTip": "Services\\Implementations\\InvitationService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAIBQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:50:09.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "InvitationController.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\InvitationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\InvitationController.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\InvitationController.cs",
+              "RelativeToolTip": "Controllers\\InvitationController.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAIBQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:51:23.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Event.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Event.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\Event.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Event.cs",
+              "RelativeToolTip": "Models\\Entities\\Event.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:48:48.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "FinanceController.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\FinanceController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FinanceController.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\FinanceController.cs",
+              "RelativeToolTip": "Controllers\\FinanceController.cs",
+              "ViewState": "AgIAANAAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:56:42.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Payment.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\Payment.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Payment.cs",
+              "RelativeToolTip": "Models\\Entities\\Payment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:54:04.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "InvitationsController.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\InvitationsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\InvitationsController.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\InvitationsController.cs",
+              "RelativeToolTip": "Controllers\\InvitationsController.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:51:17.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AgIAANAAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:47:57.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "IInvitationService.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Interfaces\\IInvitationService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\IInvitationService.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Interfaces\\IInvitationService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\IInvitationService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAABYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:50:26.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "IInvitationRepository.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Interfaces\\IInvitationRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Interfaces\\IInvitationRepository.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Interfaces\\IInvitationRepository.cs",
+              "RelativeToolTip": "Data\\Interfaces\\IInvitationRepository.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAABYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:50:02.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "InvitationRepository.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Repository\\InvitationRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repository\\InvitationRepository.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Data\\Repository\\InvitationRepository.cs",
+              "RelativeToolTip": "Data\\Repository\\InvitationRepository.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAIBQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:49:49.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "EventController.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\EventController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EventController.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Controllers\\EventController.cs",
+              "RelativeToolTip": "Controllers\\EventController.cs",
+              "ViewState": "AgIAAM4AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:49:43.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Invitation.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Invitation.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\Invitation.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Models\\Entities\\Invitation.cs",
+              "RelativeToolTip": "Models\\Entities\\Invitation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:48:25.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IEventService.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Interfaces\\IEventService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\IEventService.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Interfaces\\IEventService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\IEventService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAABYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:48:09.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "EventService.cs",
+              "DocumentMoniker": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Implementations\\EventService.cs",
+              "RelativeDocumentMoniker": "Services\\Implementations\\EventService.cs",
+              "ToolTip": "D:\\VS repo\\ArtClub\\ArtClub\\Services\\Implementations\\EventService.cs",
+              "RelativeToolTip": "Services\\Implementations\\EventService.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T12:48:01.1Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

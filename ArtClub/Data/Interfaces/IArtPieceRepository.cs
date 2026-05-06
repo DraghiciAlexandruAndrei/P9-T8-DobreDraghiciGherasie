@@ -10,7 +10,7 @@ namespace ArtClub.DataAccess.Interfaces
         Task AddAsync(ArtPiece artPiece);
         Task<bool> UpdateAsync(ArtPiece artPiece);
         Task<bool> DeleteAsync(int id);
-        Task AddToEventAsync(int eventId, int artPieceId);
+        Task AddToEventAsync(int eventId, int resourceId);
         Task<List<int>> GetAssignedIdsForEventAsync(int eventId);
     }
 }

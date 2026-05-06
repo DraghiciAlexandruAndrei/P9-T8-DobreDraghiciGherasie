@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label asp-for="ResourceName" class="form-label font-weight-bold text-primary">Schimbă Sala (300 lei/zi)</label>
+                    <label asp-for="ResourceName" class="form-label font-weight-bold text-primary">Selectează Locația (300 lei/zi)</label>
                     <select asp-for="ResourceName" asp-items="Model.AvailableResources" class="form-select border-primary">
                         <option value="">-- Selectează locația --</option>
                     </select>
@@ -62,7 +62,7 @@
                             multiple
                             size="4"
                             id="artPieces"
-                            asp-items="@(ViewBag.ArtPiecesList as IEnumerable<SelectListItem>)">
+                            asp-items="Model.AvailableArtPieces">
                     </select>
                     <small class="text-muted">Ține apăsat <strong>Ctrl</strong> pentru a adăuga/elimina piese.</small>
                 </div>

@@ -21,7 +21,7 @@ namespace ArtClub.DataAccess.Repositories
                 .Include(e => e.Resource)
                 .Include(e => e.Reservation)
                 .Include(e => e.EventArtPieces)      // Pas 1: Include tabelul de legătură
-                    .ThenInclude(eap => eap.ArtPiece) // Pas 2: Include obiectul ArtPiece real
+                    .ThenInclude(e => e.Resource)   // Pas 2: Include obiectul ArtPiece real
                 .Include(e => e.Invitations)
                     .ThenInclude(i => i.Invitee)
                 .FirstOrDefaultAsync(e => e.Title == title);

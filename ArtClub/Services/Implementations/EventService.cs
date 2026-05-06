@@ -45,7 +45,7 @@ namespace ArtClub.Services.Implementations
             if (organizerEventsCount >= user.EventCreationLimit) return false;
 
             // 2. Calculăm costul estimat
-            int artCount = model.EventArtPieces?.Count ?? 0;
+            int artCount = model.EventArtPieces?.Count ?? 0; // Count unchanged
             int days = (model.Reservation.EndTime - model.Reservation.StartTime).Days;
             if (days <= 0) days = 1;
 

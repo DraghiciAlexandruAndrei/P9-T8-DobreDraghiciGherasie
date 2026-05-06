@@ -22,7 +22,7 @@ namespace ArtClub.Models.Entities
         public int QuantityAvailable { get; set; } = 1;
 
         // Location/Address information (REQ-36)
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         // Is this an affiliated/external venue? (REQ-36)
         public bool IsAffiliatedVenue { get; set; } = false;
@@ -31,7 +31,7 @@ namespace ArtClub.Models.Entities
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         // Image/thumbnail for display in listings
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         // Whether resource is currently available for booking
         public bool IsActive { get; set; } = true;

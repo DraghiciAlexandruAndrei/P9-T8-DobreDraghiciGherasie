@@ -10,6 +10,8 @@ namespace ArtClub.Models.ViewModels
         // Capacity for venues only
         public int? Capacity { get; set; }
 
+        public decimal BasePrice { get; set; }
+
         // Resource type selection
         public int ResourceTypeId { get; set; }
 
@@ -17,13 +19,15 @@ namespace ArtClub.Models.ViewModels
         public int QuantityAvailable { get; set; } = 1;
 
         // Location/Address information (REQ-36)
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         // Is this an affiliated external venue?
         public bool IsAffiliatedVenue { get; set; } = false;
 
         // Image/thumbnail URL
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
+
+        public bool IsActive { get; set; } = true;
 
         // For dropdown selection in view
         public List<SelectListItem> ResourceTypes { get; set; } = new List<SelectListItem>();

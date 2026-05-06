@@ -19,6 +19,8 @@ namespace ArtClub.Models.ViewModels
 
         public decimal TotalCost { get; set; }  // Adăugăm proprietatea pentru costul total
 
+        public int ArtPieceCount { get; set; }
+
         // Proprietatea nouă:
         public List<Invitation> Invitations { get; set; } = new List<Invitation>();
     }

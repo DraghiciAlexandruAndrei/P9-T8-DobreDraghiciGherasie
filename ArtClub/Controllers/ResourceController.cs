@@ -25,7 +25,7 @@ namespace ArtClub.Controllers
                 Name = r.Name,
                 Type = GetResourceTypeDisplay(r.Type),
                 Capacity = r.Capacity,
-                Location = r.Location ?? (IsVenueType(r.Type) ? "Club venue" : "Equipment"),
+                Location = r.Location ?? (IsVenueType(r.Type) ? "Hall" : "Equipment"),
                 Status = r.Reservations.Any(res =>
                     res.StartTime.AddDays(-1) <= DateTime.Now &&
                     res.EndTime.AddDays(1) >= DateTime.Now)
@@ -67,7 +67,7 @@ namespace ArtClub.Controllers
         public async Task<IActionResult> Equipment()
         {
             var resources = await _reservationService.GetAllResourcesAsync();
-            var equipment = resources.Where(r => !IsVenueType(r.Type)).ToList();
+            var equipment = resources.Where(r => r.Type == ResourceType.Equipment || r.Type == ResourceType.ArtPiece).ToList();
 
             var model = equipment.Select(r => new ResourceOverviewViewModel
             {
@@ -118,16 +118,39 @@ namespace ArtClub.Controllers
                 Name = model.Name,
                 Description = model.Type,
                 Capacity = IsVenueType((ResourceType)model.ResourceTypeId) ? model.Capacity : null,
-                BasePrice = 0,
+                BasePrice = model.BasePrice,
                 Type = (ResourceType)model.ResourceTypeId,
                 QuantityAvailable = model.QuantityAvailable > 0 ? model.QuantityAvailable : 1,
                 Location = model.Location,
                 IsAffiliatedVenue = model.IsAffiliatedVenue,
                 ImageUrl = model.ImageUrl,
-                IsActive = true
+                IsActive = model.IsActive
             };
 
             await _reservationService.CreateResourceAsync(resource);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> RefreshTypes()
+        {
+            var resources = await _reservationService.GetAllResourcesAsync();
+
+            foreach (var resource in resources)
+            {
+                if (resource.Type == ResourceType.Other && !string.IsNullOrWhiteSpace(resource.Description))
+                {
+                    var description = resource.Description.ToLowerInvariant();
+                    if (description.Contains("hall") || description.Contains("sala") || description.Contains("room"))
+                    {
+                        resource.Type = ResourceType.Hall;
+                    }
+                    else if (description.Contains("equipment") || description.Contains("proiector") || description.Contains("audio"))
+                    {
+                        resource.Type = ResourceType.Equipment;
+                    }
+                }
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -149,6 +172,8 @@ namespace ArtClub.Controllers
                 Location = resource.Location,
                 IsAffiliatedVenue = resource.IsAffiliatedVenue,
                 ImageUrl = resource.ImageUrl,
+                BasePrice = resource.BasePrice,
+                IsActive = resource.IsActive,
                 ResourceTypes = GetResourceTypeSelectList()
             };
 
@@ -177,6 +202,8 @@ namespace ArtClub.Controllers
             resource.Location = model.Location;
             resource.IsAffiliatedVenue = model.IsAffiliatedVenue;
             resource.ImageUrl = model.ImageUrl;
+            resource.BasePrice = model.BasePrice;
+            resource.IsActive = model.IsActive;
 
             var success = await _reservationService.UpdateResourceAsync(originalName, resource);
 
@@ -219,31 +246,17 @@ namespace ArtClub.Controllers
 
         private bool IsVenueType(ResourceType type)
         {
-            return type == ResourceType.ConferenceRoom 
-                || type == ResourceType.ExhibitionHall 
-                || type == ResourceType.OutdoorLocation 
-                || type == ResourceType.AffiliatedVenue;
+            return type == ResourceType.Hall;
         }
 
         private string GetResourceTypeDisplay(ResourceType type)
         {
             return type switch
             {
-                // Venues
-                ResourceType.ConferenceRoom => "Conference Room",
-                ResourceType.ExhibitionHall => "Exhibition Hall",
-                ResourceType.OutdoorLocation => "Outdoor Location",
-                ResourceType.AffiliatedVenue => "Affiliated Venue",
-
-                // Equipment & Supplies
-                ResourceType.ArtEquipment => "Art Equipment",
-                ResourceType.AudioVisualEquipment => "Audio-Visual Equipment",
-                ResourceType.Furniture => "Furniture",
-                ResourceType.PhotographyEquipment => "Photography Equipment",
-                ResourceType.DecorationMaterials => "Decoration Materials",
+                ResourceType.Hall => "Hall",
+                ResourceType.Equipment => "Equipment",
                 ResourceType.ArtPiece => "Art Piece",
                 ResourceType.Other => "Other",
-
                 _ => "Unknown"
             };
         }
@@ -251,21 +264,11 @@ namespace ArtClub.Controllers
         private List<SelectListItem> GetResourceTypeSelectList()
         {
             return new List<SelectListItem>
-            {
-                // Venues group
-                new SelectListItem { Value = "0", Text = "🏢 Conference Room (Venue)" },
-                new SelectListItem { Value = "1", Text = "🖼️ Exhibition Hall (Venue)" },
-                new SelectListItem { Value = "10", Text = "🌳 Outdoor Location (Venue)" },
-                new SelectListItem { Value = "11", Text = "📍 Affiliated Venue (External)" },
-
-                // Equipment & Supplies group
-                new SelectListItem { Value = "2", Text = "🎨 Art Equipment (Multiple units)" },
-                new SelectListItem { Value = "3", Text = "🎬 Audio-Visual Equipment (Multiple units)" },
-                new SelectListItem { Value = "4", Text = "🪑 Furniture (Multiple units)" },
-                new SelectListItem { Value = "5", Text = "📷 Photography Equipment (Multiple units)" },
-                new SelectListItem { Value = "6", Text = "✨ Decoration Materials (Multiple units)" },
-                new SelectListItem { Value = "7", Text = "🎭 Art Piece (Multiple units)" },
-                new SelectListItem { Value = "99", Text = "📦 Other (Multiple units)" }
+        {
+            new SelectListItem { Value = ((int)ResourceType.Hall).ToString(), Text = "🏢 Hall" },
+            new SelectListItem { Value = ((int)ResourceType.Equipment).ToString(), Text = "🎨 Equipment" },
+            new SelectListItem { Value = ((int)ResourceType.ArtPiece).ToString(), Text = "🖼️ Art Piece" },
+            new SelectListItem { Value = ((int)ResourceType.Other).ToString(), Text = "📦 Other" }
             };
         }
     }

@@ -20,12 +20,15 @@
         <div class="row">
             <div class="col-md-6">
                 <p class="mb-1"><strong>Description / Type:</strong> @Model.Description</p>
-                <p class="mb-1"><strong>Capacity:</strong> @Model.Capacity</p>
+                <p class="mb-1"><strong>Category:</strong> @Model.Type</p>
+                <p class="mb-1"><strong>Capacity:</strong> @(Model.Capacity?.ToString() ?? "N/A")</p>
+                <p class="mb-1"><strong>Quantity:</strong> @Model.QuantityAvailable</p>
                 <p class="mb-1"><strong>Base price:</strong> @Model.BasePrice</p>
             </div>
 
             <div class="col-md-6">
-                <p class="mb-1"><strong>Location:</strong> Club venue</p>
+                <p class="mb-1"><strong>Location:</strong> @Model.Location</p>
+                <p class="mb-1"><strong>Affiliated:</strong> @(Model.IsAffiliatedVenue ? "Yes" : "No")</p>
                 <p class="mb-1">
                     <strong>Status:</strong>
                     @{

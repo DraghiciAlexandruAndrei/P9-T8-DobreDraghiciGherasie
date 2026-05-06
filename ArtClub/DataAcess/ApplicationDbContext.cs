@@ -30,9 +30,9 @@ namespace ArtClub.DataAccess
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new EventConfiguration());
 
-            // Cheia compusă pentru tabela de legătură (Eveniment-Piesă Artă)
+            // Cheia compusă pentru tabela de legătură (Eveniment-Resursă Tip ArtPiece)
             modelBuilder.Entity<EventArtPiece>()
-                .HasKey(eap => new { eap.EventId, eap.ArtPieceId });
+                .HasKey(eap => new { eap.EventId, eap.ResourceId });
 
             // Configurare precizie zecimale pentru SQL Server
             modelBuilder.Entity<Event>()

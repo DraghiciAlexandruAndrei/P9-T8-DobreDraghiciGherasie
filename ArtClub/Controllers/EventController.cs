@@ -68,7 +68,8 @@ namespace ArtClub.Controllers
                 ResourceName = ev.Resource?.Name ?? "No resource",
                 Date = ev.Reservation?.StartTime ?? DateTime.Now,
                 AttendingCount = ev.Invitations?.Count(i => i.Status == InvitationStatus.Accepted) ?? 0,
-                ArtPieceNames = ev.EventArtPieces?.Select(eap => eap.ArtPiece.Title).ToList() ?? new List<string>(),
+                ArtPieceNames = ev.EventArtPieces?.Select(eap => eap.Resource.Name).ToList() ?? new List<string>(),
+                ArtPieceCount = ev.EventArtPieces?.Count ?? 0,
                 TotalCost = ev.Budget,
                 Invitations = ev.Invitations?.ToList() ?? new List<Invitation>()
             };
@@ -89,7 +90,9 @@ namespace ArtClub.Controllers
             var start = DateTime.Now.AddDays(1);
             start = new DateTime(start.Year, start.Month, start.Day, 10, 0, 0);
 
-            var resources = await _eventService.GetAllResourcesAsync();
+            var resources = (await _eventService.GetAllResourcesAsync())
+                .Where(r => IsVenueType(r.Type))
+                .ToList();
             await PopulateArtPiecesViewBag();
 
             var model = new EventCreateViewModel
@@ -117,7 +120,9 @@ namespace ArtClub.Controllers
             if (!ModelState.IsValid)
             {
                 await PopulateArtPiecesViewBag();
-                var resources = await _eventService.GetAllResourcesAsync();
+                var resources = (await _eventService.GetAllResourcesAsync())
+                    .Where(r => IsVenueType(r.Type))
+                    .ToList();
                 model.AvailableResources = resources.Select(r => new SelectListItem { Value = r.Name, Text = r.Name }).ToList();
                 return View(model);
             }
@@ -150,7 +155,7 @@ namespace ArtClub.Controllers
                 },
                 EventArtPieces = model.SelectedArtPieceIds?.Select(id => new EventArtPiece
                 {
-                    ArtPieceId = id
+                    ResourceId = id
                 }).ToList() ?? new List<EventArtPiece>()
             };
 
@@ -160,7 +165,9 @@ namespace ArtClub.Controllers
             {
                 ModelState.AddModelError("", "Eroare: Verifică dacă sala este disponibilă sau dacă ai atins limita de evenimente.");
                 await PopulateArtPiecesViewBag();
-                var resources = await _eventService.GetAllResourcesAsync();
+                var resources = (await _eventService.GetAllResourcesAsync())
+                    .Where(r => IsVenueType(r.Type))
+                    .ToList();
                 model.AvailableResources = resources.Select(r => new SelectListItem { Value = r.Name, Text = r.Name }).ToList();
                 return View(model);
             }
@@ -186,9 +193,10 @@ namespace ArtClub.Controllers
             }
 
             await PopulateArtPiecesViewBag();
-            var resources = await _eventService.GetAllResourcesAsync();
+            var resources = (await _eventService.GetAllResourcesAsync())
+                .Where(r => IsVenueType(r.Type))
+                .ToList();
             ViewBag.OriginalTitle = ev.Title;
-
             var model = new EventCreateViewModel
             {
                 Title = ev.Title,
@@ -196,11 +204,16 @@ namespace ArtClub.Controllers
                 StartDate = ev.Reservation?.StartTime ?? DateTime.Now,
                 EndDate = ev.Reservation?.EndTime ?? DateTime.Now.AddHours(2),
                 ResourceName = ev.Resource?.Name,
-                SelectedArtPieceIds = ev.EventArtPieces?.Select(eap => eap.ArtPieceId).ToList() ?? new List<int>(),
+                SelectedArtPieceIds = ev.EventArtPieces?.Select(eap => eap.ResourceId).ToList() ?? new List<int>(),
                 AvailableResources = resources.Select(r => new SelectListItem { Value = r.Name, Text = r.Name }).ToList()
             };
 
             return View(model);
+        }
+
+        private static bool IsVenueType(ResourceType type)
+        {
+            return type == ResourceType.Hall;
         }
 
         // POST: Event/Edit
@@ -214,6 +227,10 @@ namespace ArtClub.Controllers
             {
                 ViewBag.OriginalTitle = originalTitle;
                 await PopulateArtPiecesViewBag();
+                var resources = (await _eventService.GetAllResourcesAsync())
+                    .Where(r => IsVenueType(r.Type))
+                    .ToList();
+                model.AvailableResources = resources.Select(r => new SelectListItem { Value = r.Name, Text = r.Name }).ToList();
                 return View(model);
             }
 
@@ -237,7 +254,7 @@ namespace ArtClub.Controllers
                 },
                 EventArtPieces = model.SelectedArtPieceIds?.Select(id => new EventArtPiece
                 {
-                    ArtPieceId = id
+                    ResourceId = id
                 }).ToList() ?? new List<EventArtPiece>()
             };
 
@@ -293,11 +310,13 @@ namespace ArtClub.Controllers
         // Ajutor pentru popularea listei de piese de artă
         private async Task PopulateArtPiecesViewBag()
         {
-            var artPieces = await _artPieceService.GetAllArtPiecesAsync();
-            ViewBag.ArtPiecesList = artPieces.Select(a => new SelectListItem
+            var resources = await _eventService.GetAllResourcesAsync();
+            var artPieces = resources.Where(r => r.Type == ResourceType.ArtPiece).ToList();
+
+            ViewBag.ArtPiecesList = artPieces.Select(r => new SelectListItem
             {
-                Value = a.Id.ToString(),
-                Text = a.Title
+                Value = r.Id.ToString(),
+                Text = r.Name
             }).ToList();
         }
 

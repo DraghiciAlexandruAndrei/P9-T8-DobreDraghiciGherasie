@@ -56,13 +56,18 @@
                     <label asp-for="ResourceName" class="form-label font-weight-bold text-primary">Alege Sala (300 lei/zi)</label>
                     <select asp-for="ResourceName" asp-items="Model.AvailableResources" class="form-select border-primary">
                         <option value="">-- Selectează locația --</option>
+                        @* Add available resources here *@
+                        @foreach (var resource in Model.AvailableResources)
+                        {
+                            <option value="@resource.Value">@resource.Text</option>
+                        }
                     </select>
                     <span asp-validation-for="ResourceName" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-6">
                     <label class="form-label font-weight-bold text-primary">Piese de Artă (200 lei/buc/zi)</label>
-                    <select name="SelectedArtPieceIds" class="form-select border-primary" multiple size="3" id="artPieces">
+                    <select name="SelectedArtPieceIds" class="form-select border-primary" multiple size="3" id="artPieces" aria-label="Selectează Piese de Artă">
                         @if (ViewBag.ArtPiecesList != null)
                         {
                             foreach (var item in (IEnumerable<SelectListItem>)ViewBag.ArtPiecesList)

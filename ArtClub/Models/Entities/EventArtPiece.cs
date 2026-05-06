@@ -5,8 +5,8 @@
         public int EventId { get; set; }
         public virtual Event Event { get; set; }
 
-        public int ArtPieceId { get; set; }
-        public virtual ArtPiece ArtPiece { get; set; }
+        public int ResourceId { get; set; }
+        public virtual Resource Resource { get; set; }
     }
 }
 

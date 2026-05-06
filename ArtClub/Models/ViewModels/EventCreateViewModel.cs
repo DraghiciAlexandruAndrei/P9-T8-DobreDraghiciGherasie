@@ -16,5 +16,6 @@ namespace ArtClub.Models.ViewModels
 
         public List<int> SelectedArtPieceIds { get; set; } = new List<int>();
         public List<SelectListItem>? AvailableResources { get; set; }
+        public List<SelectListItem>? AvailableArtPieces { get; set; }
     }
 }

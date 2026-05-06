@@ -27,15 +27,57 @@
             </div>
 
             <div class="col-md-6">
-                <label asp-for="Type" class="form-label">Resource type</label>
-                <input asp-for="Type" class="form-control" placeholder="Example: Exhibition hall, studio, meeting room" />
+                <label asp-for="ResourceTypeId" class="form-label">Resource category</label>
+                <select asp-for="ResourceTypeId" asp-items="Model.ResourceTypes" class="form-select">
+                    <option value="">-- Select category --</option>
+                </select>
+                <span asp-validation-for="ResourceTypeId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Type" class="form-label">Specific type/label</label>
+                <input asp-for="Type" class="form-control" placeholder="Example: Large Hall, Projector, Sculpture" />
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
 
             <div class="col-md-6">
-                <label asp-for="Capacity" class="form-label">Capacity</label>
+                <label asp-for="Capacity" class="form-label">Capacity (venues only)</label>
                 <input asp-for="Capacity" type="number" min="1" class="form-control" placeholder="Example: 50" />
                 <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="QuantityAvailable" class="form-label">Quantity (equipment/art pieces)</label>
+                <input asp-for="QuantityAvailable" type="number" min="1" class="form-control" placeholder="Example: 5" />
+                <span asp-validation-for="QuantityAvailable" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="Location" class="form-label">Location (for halls)</label>
+                <input asp-for="Location" class="form-control" placeholder="Example: Main building, 2nd floor" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="BasePrice" class="form-label">Base price</label>
+                <input asp-for="BasePrice" type="number" min="0" step="0.01" class="form-control" placeholder="Example: 100" />
+                <span asp-validation-for="BasePrice" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 form-check">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label asp-for="IsActive" class="form-check-label">Active (bookable)</label>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="ImageUrl" class="form-label">Image URL (optional)</label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="https://..." />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 form-check">
+                <input asp-for="IsAffiliatedVenue" class="form-check-input" />
+                <label asp-for="IsAffiliatedVenue" class="form-check-label">External hall (affiliated)</label>
             </div>
 
             <div class="col-12">
@@ -54,4 +96,27 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function toggleResourceFields() {
+            const typeSelect = document.getElementById('ResourceTypeId');
+            if (!typeSelect) return;
+
+            const selected = parseInt(typeSelect.value || '-1', 10);
+            const isHall = selected === 0;
+
+            const capacityField = document.querySelector('[name="Capacity"]')?.closest('.col-md-6');
+            const quantityField = document.querySelector('[name="QuantityAvailable"]')?.closest('.col-md-6');
+            const locationField = document.querySelector('[name="Location"]')?.closest('.col-12');
+            const affiliatedField = document.querySelector('[name="IsAffiliatedVenue"]')?.closest('.col-12');
+
+            if (capacityField) capacityField.style.display = isHall ? '' : 'none';
+            if (locationField) locationField.style.display = isHall ? '' : 'none';
+            if (affiliatedField) affiliatedField.style.display = isHall ? '' : 'none';
+            if (quantityField) quantityField.style.display = isHall ? 'none' : '';
+        }
+
+        document.getElementById('ResourceTypeId')?.addEventListener('change', toggleResourceFields);
+        window.addEventListener('load', toggleResourceFields);
+    </script>
 }

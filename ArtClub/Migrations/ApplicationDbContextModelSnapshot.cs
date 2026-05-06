@@ -97,12 +97,17 @@ namespace ArtClub.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ArtPieceId")
+                    b.Property<int>("ResourceId")
                         .HasColumnType("int");
 
-                    b.HasKey("EventId", "ArtPieceId");
+                    b.Property<int?>("ArtPieceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EventId", "ResourceId");
 
                     b.HasIndex("ArtPieceId");
+
+                    b.HasIndex("ResourceId");
 
                     b.ToTable("EventArtPieces");
                 });
@@ -209,16 +214,37 @@ namespace ArtClub.Migrations
                     b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Capacity")
+                    b.Property<int?>("Capacity")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAffiliatedVenue")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuantityAvailable")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -470,11 +496,9 @@ namespace ArtClub.Migrations
 
             modelBuilder.Entity("ArtClub.Models.Entities.EventArtPiece", b =>
                 {
-                    b.HasOne("ArtClub.Models.Entities.ArtPiece", "ArtPiece")
+                    b.HasOne("ArtClub.Models.Entities.ArtPiece", null)
                         .WithMany("EventArtPieces")
-                        .HasForeignKey("ArtPieceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ArtPieceId");
 
                     b.HasOne("ArtClub.Models.Entities.Event", "Event")
                         .WithMany("EventArtPieces")
@@ -482,9 +506,15 @@ namespace ArtClub.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ArtPiece");
+                    b.HasOne("ArtClub.Models.Entities.Resource", "Resource")
+                        .WithMany()
+                        .HasForeignKey("ResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Event");
+
+                    b.Navigation("Resource");
                 });
 
             modelBuilder.Entity("ArtClub.Models.Entities.Invitation", b =>

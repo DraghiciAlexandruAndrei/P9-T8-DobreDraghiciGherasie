@@ -55,15 +55,23 @@ namespace ArtClub.DataAccess.Repositories
             return true;
         }
 
-        public async Task AddToEventAsync(int eventId, int artPieceId)
+        public async Task AddToEventAsync(int eventId, int resourceId)
         {
-            _context.EventArtPieces.Add(new EventArtPiece { EventId = eventId, ArtPieceId = artPieceId });
+            _context.EventArtPieces.Add(new EventArtPiece
+            {
+                EventId = eventId,
+                ResourceId = resourceId
+            });
+
             await _context.SaveChangesAsync();
         }
 
         public async Task<List<int>> GetAssignedIdsForEventAsync(int eventId)
         {
-            return await _context.EventArtPieces.Where(eap => eap.EventId == eventId).Select(eap => eap.ArtPieceId).ToListAsync();
+            return await _context.EventArtPieces
+                .Where(eap => eap.EventId == eventId)
+                .Select(eap => eap.ResourceId)
+                .ToListAsync();
         }
     }
 }

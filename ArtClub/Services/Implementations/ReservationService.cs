@@ -60,6 +60,12 @@ namespace ArtClub.Services.Implementations
             resource.Description = model.Description;
             resource.Capacity = model.Capacity;
             resource.BasePrice = model.BasePrice;
+            resource.Type = model.Type;
+            resource.QuantityAvailable = model.QuantityAvailable;
+            resource.Location = model.Location;
+            resource.IsAffiliatedVenue = model.IsAffiliatedVenue;
+            resource.ImageUrl = model.ImageUrl;
+            resource.IsActive = model.IsActive;
 
             return await _reservationRepo.SaveChangesAsync();
         }
