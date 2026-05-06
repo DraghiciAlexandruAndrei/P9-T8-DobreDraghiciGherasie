@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using ArtClub.DataAccess; // Namespace-ul unde se află ApplicationDbContext
+using ArtClub.DataAccess;
+using ArtClub.DataAccess.Interfaces;
+using ArtClub.DataAccess.Repositories;
 using ArtClub.Services.Interfaces;
 using ArtClub.Services.Implementations;
 
@@ -10,27 +12,40 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// 2. Înregistrarea Serviciilor (Dependency Injection)
-// Fără astea, Controllerul va da eroare când va încerca să pornească
-// 1. Mai întâi utilitarele de bază (care nu depind de nimeni)
+// 2. Înregistrarea REPOSITORY-URILOR (Data Access Layer)
+// Acestea trebuie înregistrate pentru ca Serviciile să le poată folosi
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IArtPieceRepository, ArtPieceRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+
+// 3. Înregistrarea SERVICIILOR (Business Logic Layer)
+// Înregistrăm mai întâi utilitarele independente
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
-// 2. Apoi serviciile care depind de Context sau de Notificări
+// Înregistrăm serviciile care folosesc Repository-urile de mai sus
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IArtPieceService, ArtPieceService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
-
-// 3. La final, serviciile complexe care depind de cele de mai sus
-// EventService are nevoie de INotificationService, deci e bine să fie după el.
-builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IFinanceService, FinanceService>();
 
-// Add services to the container.
+// EventService depinde de aproape toate celelalte, deci îl punem la final
+builder.Services.AddScoped<IEventService, EventService>();
+
+// 4. Configurare Servicii de Sistem (Sesiune și MVC)
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// 5. Configurare Pipeline HTTP (Middleware)
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -40,7 +55,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-// Ordinea contează: întâi Autentificare, apoi Autorizare
+// Sesiunea trebuie activată ÎNAINTE de Autentificare
+app.UseSession();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
