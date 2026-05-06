@@ -65,7 +65,7 @@ namespace ArtClub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeRole(UserRole.Member)]
+        
         public async Task<IActionResult> Create(EventCreateViewModel model)
         {
             if (!ModelState.IsValid)
