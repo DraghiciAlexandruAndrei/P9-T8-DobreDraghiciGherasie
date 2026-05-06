@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
@@ -10,3 +11,9 @@
 /ArtClub/.vs/ArtClub/FileContentIndex
 /ArtClub/.vs/CopilotSnapshots
 /ArtClub/obj/Debug/net10.0/compressed
+=======
+﻿
+/ArtClub/.vs/ArtClub/CopilotIndices/18.5.39187.10602
+/ArtClub/.vs/ArtClub/FileContentIndex
+>>>>>>> Stashed changes
+/.vs/ArtClub/CopilotIndices/18.5.39187.10602
