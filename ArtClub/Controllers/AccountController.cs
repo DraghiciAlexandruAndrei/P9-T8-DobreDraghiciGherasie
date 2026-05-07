@@ -1,4 +1,7 @@
-﻿using ArtClub.Models.Entities;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using ArtClub.Models.Entities;
 using ArtClub.Models.Enums;
 using ArtClub.Models.ViewModels;
 using ArtClub.Services.Interfaces;
@@ -6,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ArtClub.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly IUserService _userService;
 
@@ -55,12 +58,38 @@ namespace ArtClub.Controllers
                 return View("Login", model);
             }
 
+            if (user.IsBanned)
+            {
+                ModelState.AddModelError("", "This account has been banned.");  // Cont blocat
+                return View("Login", model);
+            }
+
+            
+
+            // Setăm cookie-ul de autentificare cu claim-uri pentru [Authorize]
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),  // ← used by GetCurrentUserId()
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim("Role", user.Role.ToString())
+            };
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(identity));
+
+            // Setăm sesiunea pentru compatibilitate cu codul existent
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("UserName", user.UserName ?? "");
             HttpContext.Session.SetString("UserRole", user.Role.ToString());
 
             TempData["StatusMessage"] = "Login completed successfully.";
+
+            // Redirecționare în funcție de rol
             return RedirectToAction("Index", "Home");
+            // return user.Role == UserRole.Admin
+            //? RedirectToAction("Index", "Admin")  // Dashboard Admini
+            //: RedirectToAction("Index", "Home");  // Home useri
         }
 
         public IActionResult Register()
@@ -173,10 +202,11 @@ namespace ArtClub.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Logout()
+        // Deconectare: șterge sesiunea ȘI cookie-ul de autentificare
+        public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Clear();
-
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             TempData["StatusMessage"] = "You have been signed out.";
             return RedirectToAction("Index", "Home");
         }
