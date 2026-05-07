@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ArtClub.Controllers
 {
-    public class ResourceController : Controller
+    public class ResourceController : BaseController
     {
         private readonly IReservationService _reservationService;
 

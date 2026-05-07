@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ArtClub.Controllers
 {
-    public class ArtPieceController : Controller
+    public class ArtPieceController : BaseController
     {
         private readonly IArtPieceService _artPieceService;
 

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ArtClub.DataAccess;
 using ArtClub.DataAccess.Interfaces;
 using ArtClub.DataAccess.Repositories;
@@ -43,9 +44,28 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddControllersWithViews();
 
+// 5. Autentificare pe bază de Cookie (fără ASP.NET Identity)
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+    });
+
+// 6. Politici de Autorizare bazate pe Claim-uri
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireClaim("Role", "Admin"));
+    options.AddPolicy("MemberOrAdmin", policy =>
+        policy.RequireClaim("Role", "Admin", "Member"));
+});
+
 var app = builder.Build();
 
-// 5. Configurare Pipeline HTTP (Middleware)
+// 7. Configurare Pipeline HTTP (Middleware)
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -53,6 +73,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();   // necesar pentru CSS/JS/imagini
 app.UseRouting();
 
 // Sesiunea trebuie activată ÎNAINTE de Autentificare

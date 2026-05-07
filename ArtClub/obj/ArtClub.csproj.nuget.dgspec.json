@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj": {}
+    "D:\\VS repo\\ArtClub\\ArtClub\\ArtClub.csproj": {}
   },
   "projects": {
-    "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj": {
+    "D:\\VS repo\\ArtClub\\ArtClub\\ArtClub.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj",
+        "projectUniqueName": "D:\\VS repo\\ArtClub\\ArtClub\\ArtClub.csproj",
         "projectName": "ArtClub",
-        "projectPath": "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj",
-        "packagesPath": "C:\\Users\\q0ant\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\obj\\",
+        "projectPath": "D:\\VS repo\\ArtClub\\ArtClub\\ArtClub.csproj",
+        "packagesPath": "C:\\Users\\coden\\.nuget\\packages\\",
+        "outputPath": "D:\\VS repo\\ArtClub\\ArtClub\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\q0ant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\coden\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -30,7 +30,6 @@
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -45,76 +44,67 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[10.0.7, )"
-            },
-            "Microsoft.AspNetCore.Identity.UI": {
-              "target": "Package",
-              "version": "[10.0.7, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Abstractions": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Analyzers": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer.Abstractions": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer.HierarchyId": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite.Core": {
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.7, )"
+              "version": "[10.0.5, )"
             },
             "PDFsharp": {
               "target": "Package",
-              "version": "[6.2.4, )"
+              "version": "[6.1.1, )"
             }
           },
           "imports": [
@@ -136,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300-preview.0.26177.108/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

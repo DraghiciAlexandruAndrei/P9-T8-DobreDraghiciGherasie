@@ -1,23 +1,30 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using ArtClub.Models.Entities;
 using ArtClub.Models.Enums;
 using ArtClub.Models.ViewModels;
 using ArtClub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using ArtClub.DataAccess;
+using ArtClub.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace ArtClub.Controllers
 {
     public class AccountController : BaseController
     {
         private readonly IUserService _userService;
+        private readonly ApplicationDbContext _context;
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, ApplicationDbContext context)
         {
             _userService = userService;
+            _context = context;
         }
 
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
             var users = await _userService.GetAllUsersAsync();
@@ -60,16 +67,13 @@ namespace ArtClub.Controllers
 
             if (user.IsBanned)
             {
-                ModelState.AddModelError("", "This account has been banned.");  // Cont blocat
+                ModelState.AddModelError("", "This account has been banned.");
                 return View("Login", model);
             }
 
-            
-
-            // Setăm cookie-ul de autentificare cu claim-uri pentru [Authorize]
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),  // ← used by GetCurrentUserId()
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim("Role", user.Role.ToString())
             };
@@ -78,18 +82,12 @@ namespace ArtClub.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity));
 
-            // Setăm sesiunea pentru compatibilitate cu codul existent
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("UserName", user.UserName ?? "");
             HttpContext.Session.SetString("UserRole", user.Role.ToString());
 
             TempData["StatusMessage"] = "Login completed successfully.";
-
-            // Redirecționare în funcție de rol
             return RedirectToAction("Index", "Home");
-            // return user.Role == UserRole.Admin
-            //? RedirectToAction("Index", "Admin")  // Dashboard Admini
-            //: RedirectToAction("Index", "Home");  // Home useri
         }
 
         public IActionResult Register()
@@ -114,7 +112,7 @@ namespace ArtClub.Controllers
             {
                 UserName = $"{model.FirstName} {model.LastName}".Trim(),
                 Email = model.Email,
-                Role = UserRole.Member,
+                Role = UserRole.External,   // new users start as External
                 IsActive = true,
                 MembershipDate = DateTime.Now
             };
@@ -131,23 +129,139 @@ namespace ArtClub.Controllers
             return RedirectToAction(nameof(Login));
         }
 
+        // Profile page for any logged-in user
+        [Authorize]
+        public async Task<IActionResult> Profile()
+        {
+            var userId = GetCurrentUserId();
+            if (userId == null) return RedirectToAction(nameof(Login));
+
+            var user = await _userService.GetUserByIdAsync(userId.Value);
+            if (user == null) return NotFound();
+
+            return View(user);
+        }
+        [Authorize]
+        public async Task<IActionResult> Dashboard()
+        {
+            var userId = GetCurrentUserId();
+            if (userId == null) return RedirectToAction(nameof(Login));
+
+            var user = await _userService.GetUserByIdAsync(userId.Value);
+            if (user == null) return NotFound();
+
+            // Admins go directly to the Admin panel
+            if (user.Role == UserRole.Admin)
+                return RedirectToAction("Index", "Admin");
+
+            // Build member dashboard
+            var recentInvitations = await _context.Invitations
+                .Include(i => i.Event).ThenInclude(e => e.Organizer)
+                .Where(i => i.InviteeId == userId.Value && i.Status == InvitationStatus.Pending)
+                .OrderByDescending(i => i.Event.Date)
+                .Take(5)
+                .Select(i => new RecentInvitationItem
+                {
+                    InvitationId = i.Id,
+                    EventTitle = i.Event.Title,
+                    OrganizerName = i.Event.Organizer.UserName
+                })
+                .ToListAsync();
+
+            var upcomingEvents = await _context.Events
+                .Include(e => e.Resource)
+                .Where(e => e.OrganizerId == userId.Value && e.Date >= DateTime.Now)
+                .OrderBy(e => e.Date)
+                .Take(5)
+                .Select(e => new UpcomingEventItem
+                {
+                    EventId = e.Id,
+                    Title = e.Title,
+                    ResourceName = e.Resource.Name,
+                    StartDate = e.Date
+                })
+                .ToListAsync();
+
+            const int monthlyLimit = 3;
+            var eventsThisMonth = await _context.Events
+                .CountAsync(e => e.OrganizerId == userId.Value
+                              && e.Date.Month == DateTime.Now.Month
+                              && e.Date.Year == DateTime.Now.Year);
+
+            var vm = new MemberDashboardViewModel
+            {
+                UserName = user.UserName,
+                IsMembershipActive = user.Role == UserRole.Member,
+                EventsOrganizedCount = await _context.Events.CountAsync(e => e.OrganizerId == userId.Value),
+                PendingInvitationsCount = recentInvitations.Count,
+                RemainingEventLimit = Math.Max(0, monthlyLimit - eventsThisMonth),
+                RecentInvitations = recentInvitations,
+                UpcomingEvents = upcomingEvents
+            };
+
+            return View("MemberDashboard", vm);
+        }
+
+        // POST: External user upgrades to Member
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BecomeMember()
+        {
+            var userId = GetCurrentUserId();
+            if (userId == null) return RedirectToAction(nameof(Login));
+
+            var user = await _userService.GetUserByIdAsync(userId.Value);
+            if (user == null) return NotFound();
+
+            if (user.Role == UserRole.External)
+            {
+                user.Role = UserRole.Member;
+                user.IsActive = true;
+                await _userService.UpdateUserAsync(user);
+                TempData["StatusMessage"] = "Membership activated! Welcome, Member!";
+            }
+
+            return RedirectToAction(nameof(Dashboard));
+        }
+        // External users can apply for membership
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApplyMembership()
+        {
+            var userId = GetCurrentUserId();
+            if (userId == null) return RedirectToAction(nameof(Login));
+
+            var user = await _userService.GetUserByIdAsync(userId.Value);
+            if (user == null) return NotFound();
+
+            if (user.Role == UserRole.External)
+            {
+                user.Role = UserRole.Member;
+                user.IsActive = true;
+                await _userService.UpdateUserAsync(user);
+                TempData["StatusMessage"] = "Membership approved! You are now a Member.";
+            }
+            else
+            {
+                TempData["StatusMessage"] = "You already have an active membership.";
+            }
+
+            return RedirectToAction(nameof(Profile));
+        }
+
         public async Task<IActionResult> Details(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
-
-            if (user == null)
-                return NotFound();
-
+            if (user == null) return NotFound();
             return View(user);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
-
-            if (user == null)
-                return NotFound();
-
+            if (user == null) return NotFound();
             return View(user);
         }
 
@@ -161,9 +275,7 @@ namespace ArtClub.Controllers
             bool isActive)
         {
             var user = await _userService.GetUserByIdAsync(id);
-
-            if (user == null)
-                return NotFound();
+            if (user == null) return NotFound();
 
             user.UserName = userName;
             user.Email = email;
@@ -171,9 +283,7 @@ namespace ArtClub.Controllers
             user.IsActive = isActive;
 
             var success = await _userService.UpdateUserAsync(user);
-
-            if (!success)
-                return NotFound();
+            if (!success) return NotFound();
 
             TempData["StatusMessage"] = "User updated successfully.";
             return RedirectToAction(nameof(Index));
@@ -182,10 +292,7 @@ namespace ArtClub.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
-
-            if (user == null)
-                return NotFound();
-
+            if (user == null) return NotFound();
             return View(user);
         }
 
@@ -194,15 +301,12 @@ namespace ArtClub.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var success = await _userService.DeleteUserAsync(id);
-
-            if (!success)
-                return NotFound();
+            if (!success) return NotFound();
 
             TempData["StatusMessage"] = "User deleted successfully.";
             return RedirectToAction(nameof(Index));
         }
 
-        // Deconectare: șterge sesiunea ȘI cookie-ul de autentificare
         public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Clear();

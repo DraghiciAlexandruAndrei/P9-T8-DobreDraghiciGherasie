@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ArtClub.Models.ViewModels.ArtPieceListViewModel>
+@model IEnumerable<ArtClub.Models.ViewModels.ArtPieceListViewModel>
 
 @{
     ViewData["Title"] = "Art pieces";
@@ -12,7 +12,10 @@
 
     <div>
         <a asp-action="Popular" class="btn btn-outline-secondary">Popular pieces</a>
-        <a asp-action="Create" class="btn btn-primary">Add art piece</a>
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <a asp-action="Create" class="btn btn-primary">Add art piece</a>
+        }
     </div>
 </div>
 
@@ -25,14 +28,19 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h2 class="h5">@piece.Title</h2>
-
                         <p class="mb-1"><strong>Creator:</strong> @piece.ArtistName</p>
-                        <p class="mb-3"><strong>Status:</strong> @piece.Style</p>
+                        <p class="mb-3"><strong>Style:</strong> @piece.Style</p>
 
                         <div class="d-flex gap-2 flex-wrap">
-                            <a asp-action="Details" asp-route-id="@piece.Id" class="btn btn-sm btn-outline-primary">Details</a>
-                            <a asp-action="Edit" asp-route-id="@piece.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@piece.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                            <a asp-action="Details" asp-route-id="@piece.Id"
+                               class="btn btn-sm btn-outline-primary">Details</a>
+                            @if (User.HasClaim("Role", "Admin") || User.HasClaim("Role", "Member"))
+                            {
+                                <a asp-action="Edit" asp-route-id="@piece.Id"
+                                   class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@piece.Id"
+                                   class="btn btn-sm btn-outline-danger">Delete</a>
+                            }
                         </div>
                     </div>
                 </div>

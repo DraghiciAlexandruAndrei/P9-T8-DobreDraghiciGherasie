@@ -1,13 +1,13 @@
 ﻿using ArtClub.Models.Entities;
-using ArtClub.Models.Enums;
 using ArtClub.Models.ViewModels;
 using ArtClub.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using ArtClub.Attributes; 
+
 namespace ArtClub.Controllers
 {
-    public class EventController : Controller
+    public class EventController : BaseController
     {
         private readonly IEventService _eventService;
         private readonly IArtPieceService _artPieceService;
@@ -39,15 +39,14 @@ namespace ArtClub.Controllers
             return View(model);
         }
 
-   
-        
+        [Authorize(Policy = "MemberOrAdmin")]
         public async Task<IActionResult> Create()
         {
             var start = DateTime.Now.AddDays(1);
             start = new DateTime(start.Year, start.Month, start.Day, 10, 0, 0);
 
-            // Luăm resursele din repository
-            var resources = await _eventService.GetAllResourcesAsync(); // Asigură-te că ai această metodă în Service
+            var resources = await _eventService.GetAllResourcesAsync();
+            var artPieces = await _artPieceService.GetAllArtPiecesAsync(); // already injected
 
             var model = new EventCreateViewModel
             {
@@ -60,18 +59,20 @@ namespace ArtClub.Controllers
                 }).ToList()
             };
 
+            ViewBag.AvailableArtPieces = artPieces.ToList();
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeRole(UserRole.Member)]
+        [Authorize(Policy = "MemberOrAdmin")]   // ← replaced [AuthorizeRole(UserRole.Member)]
         public async Task<IActionResult> Create(EventCreateViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            var organizerId = HttpContext.Session.GetInt32("UserId");
+            // Use claims-based helper (works even if session expired)
+            var organizerId = GetCurrentUserId();
             if (organizerId == null)
             {
                 ModelState.AddModelError("", "Trebuie să fii autentificat pentru a crea un eveniment.");
@@ -85,14 +86,13 @@ namespace ArtClub.Controllers
                 return View(model);
             }
 
-            // Creăm obiectul Eveniment
             var ev = new Event
             {
                 Title = model.Title,
                 Description = model.Description,
                 ResourceId = resource.Id,
                 OrganizerId = organizerId.Value,
-                Budget = 0, // Setat la 0 pentru a trece de verificarea de buget dacă soldul e 0
+                Budget = 0,
                 Reservation = new Reservation
                 {
                     ResourceId = resource.Id,
@@ -107,7 +107,6 @@ namespace ArtClub.Controllers
 
                 if (!success)
                 {
-                    // Mesaj specific pentru TC-001 (Documentația de testare)
                     ModelState.AddModelError("", "Eșec la salvare: Verifică dacă sala este disponibilă (există buffer de 1 zi) sau dacă bugetul este suficient.");
                     return View(model);
                 }
@@ -146,17 +145,18 @@ namespace ArtClub.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = "MemberOrAdmin")]
         public async Task<IActionResult> Edit(string title)
         {
-            if (string.IsNullOrWhiteSpace(title))
-                return NotFound();
-
+            if (string.IsNullOrWhiteSpace(title)) return NotFound();
             var ev = await _eventService.GetEventByTitleAsync(title);
+            if (ev == null) return NotFound();
 
-            if (ev == null)
-                return NotFound();
+            var resources = await _eventService.GetAllResourcesAsync();
+            var artPieces = await _artPieceService.GetAllArtPiecesAsync();
 
             ViewBag.OriginalTitle = ev.Title;
+            ViewBag.AvailableArtPieces = artPieces.ToList();
 
             var model = new EventCreateViewModel
             {
@@ -165,7 +165,13 @@ namespace ArtClub.Controllers
                 StartDate = ev.Reservation != null ? ev.Reservation.StartTime : DateTime.Now,
                 EndDate = ev.Reservation != null ? ev.Reservation.EndTime : DateTime.Now.AddHours(1),
                 SelectedResourceId = ev.ResourceId,
-                ResourceName = ev.Resource != null ? ev.Resource.Name : ""
+                ResourceName = ev.Resource != null ? ev.Resource.Name : "",
+                SelectedArtPieceIds = ev.EventArtPieces.Select(eap => eap.ArtPieceId).ToList(),
+                AvailableResources = resources.Select(r => new SelectListItem
+                {
+                    Value = r.Name,
+                    Text = r.Name
+                }).ToList()
             };
 
             return View(model);
@@ -173,6 +179,7 @@ namespace ArtClub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "MemberOrAdmin")]
         public async Task<IActionResult> Edit(string originalTitle, EventCreateViewModel model)
         {
             if (!ModelState.IsValid)
@@ -195,7 +202,6 @@ namespace ArtClub.Controllers
                 Title = model.Title,
                 Description = model.Description,
                 ResourceId = resource.Id,
-
                 Reservation = new Reservation
                 {
                     ResourceId = resource.Id,
@@ -213,6 +219,7 @@ namespace ArtClub.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Policy = "MemberOrAdmin")]
         public async Task<IActionResult> Delete(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
@@ -238,6 +245,7 @@ namespace ArtClub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "MemberOrAdmin")]
         public async Task<IActionResult> DeleteConfirmed(string title)
         {
             var success = await _eventService.DeleteEventByTitleAsync(title);
@@ -261,4 +269,4 @@ namespace ArtClub.Controllers
             return RedirectToAction(nameof(Index));
         }
     }
-}
+}   

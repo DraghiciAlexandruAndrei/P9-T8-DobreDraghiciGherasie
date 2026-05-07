@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ArtClub.Controllers
 {
-    public class FinanceController : Controller
+    public class FinanceController : BaseController
     {
         private readonly IFinanceService _financeService;
 

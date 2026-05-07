@@ -1,0 +1,55 @@
+@model ArtClub.Models.Entities.User
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title mb-4">👤 My Profile</h2>
+
+                <dl class="row">
+                    <dt class="col-sm-4">Name</dt>
+                    <dd class="col-sm-8">@Model.UserName</dd>
+
+                    <dt class="col-sm-4">Email</dt>
+                    <dd class="col-sm-8">@Model.Email</dd>
+
+                    <dt class="col-sm-4">Role</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge bg-@(Model.Role.ToString() == "Admin" ? "danger" : Model.Role.ToString() == "Member" ? "success" : "secondary")">
+                            @Model.Role
+                        </span>
+                    </dd>
+
+                    <dt class="col-sm-4">Status</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.IsActive)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning">Inactive</span>
+                        }
+                    </dd>
+                </dl>
+
+                @if (Model.Role == ArtClub.Models.Enums.UserRole.External)
+                {
+                    <hr />
+                    <h5>Want full access?</h5>
+                    <p class="text-muted">Apply for membership to create events, make reservations, and get invited to exclusive club activities.</p>
+                    <form asp-action="ApplyMembership" asp-controller="Account" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary">Apply for Membership</button>
+                    </form>
+                }
+
+                <hr />
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-sm">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
