@@ -27,6 +27,7 @@ namespace ArtClub.Models.Entities
         // Relații Many-to-Many și invitații
         public virtual ICollection<EventArtPiece> EventArtPieces { get; set; } = new List<EventArtPiece>();
         public virtual ICollection<Invitation> Invitations { get; set; } = new List<Invitation>();
+        public bool IsPaid { get; internal set; }
 
         public void Activate() => Status = EventStatus.Active;
         public void Cancel() => Status = EventStatus.Cancelled;

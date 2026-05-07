@@ -4073,8 +4073,8 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 10.0.7",
       "Microsoft.EntityFrameworkCore.Sqlite.Core >= 10.0.7",
       "Microsoft.EntityFrameworkCore.Tools >= 10.0.7",
-      "PDFsharp >= 6.2.4",
-      "PdfSharp.Extensions >= 0.1.2.2"
+      "PDFSharp.Extensions >= 0.1.2.2",
+      "PDFsharp >= 6.2.4"
     ]
   },
   "packageFolders": {
@@ -4113,6 +4113,9 @@
         }
       },
       "warningProperties": {
+        "noWarn": [
+          "NU1701"
+        ],
         "warnAsError": [
           "NU1605"
         ]
@@ -4189,13 +4192,13 @@
             "target": "Package",
             "version": "[10.0.7, )"
           },
+          "PDFSharp.Extensions": {
+            "target": "Package",
+            "version": "[0.1.2.2, )"
+          },
           "PDFsharp": {
             "target": "Package",
             "version": "[6.2.4, )"
-          },
-          "PdfSharp.Extensions": {
-            "target": "Package",
-            "version": "[0.1.2.2, )"
           }
         },
         "imports": [
@@ -4634,27 +4637,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'BitMiracle.LibTiff.NET 2.3.642' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "libraryId": "BitMiracle.LibTiff.NET",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'PDFSharp.Extensions 0.1.2.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "libraryId": "PDFSharp.Extensions",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  }
 }

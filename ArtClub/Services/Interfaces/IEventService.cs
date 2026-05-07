@@ -18,7 +18,10 @@ namespace ArtClub.Services.Interfaces
         Task<int?> GetDefaultOrganizerIdAsync();
 
         Task<List<Resource>> GetAllResourcesAsync();
-
+        Task<Event?> GetEventByIdAsync(int id);
+        Task<bool> MarkEventAsPaidAsync(int eventId);
         Task<List<User>> GetAllMembersAsync();
+
+ 
     }
 }

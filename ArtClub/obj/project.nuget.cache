@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pOTJHMzztLc=",
+  "dgSpecHash": "yVycDzyUjUk=",
   "success": true,
   "projectFilePath": "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj",
   "expectedPackageFiles": [
@@ -69,30 +69,5 @@
     "C:\\Users\\q0ant\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.4\\system.security.cryptography.pkcs.9.0.4.nupkg.sha512",
     "C:\\Users\\q0ant\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.4\\system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "message": "Package 'BitMiracle.LibTiff.NET 2.3.642' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "projectPath": "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj",
-      "libraryId": "BitMiracle.LibTiff.NET",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "message": "Package 'PDFSharp.Extensions 0.1.2.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "projectPath": "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\C#\\ProiectBD\\ArtClub\\ArtClub\\ArtClub.csproj",
-      "libraryId": "PDFSharp.Extensions",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  "logs": []
 }

@@ -20,5 +20,8 @@ namespace ArtClub.DataAccess.Interfaces
         Task<List<Resource>> GetAllResourcesAsync();
 
         Task<List<Event>> GetByOrganizerIdAsync(string userId);
+
+        Task<Event?> GetByIdAsync(int id); // Necesar pentru MarkAsPaid
+        Task UpdateAsync(Event artEvent);
     }
 }

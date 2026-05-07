@@ -11,11 +11,13 @@ namespace ArtClub.Controllers
     {
         private readonly IFinanceService _financeService;
         private readonly UserManager<User> _userManager;
+        private readonly IEventService _eventService;
 
-        public FinanceController(IFinanceService financeService, UserManager<User> userManager)
+        public FinanceController(IFinanceService financeService, UserManager<User> userManager, IEventService eventService)
         {
             _financeService = financeService;
             _userManager = userManager;
+            _eventService = eventService;
         }
 
         public IActionResult Index()
@@ -28,6 +30,8 @@ namespace ArtClub.Controllers
             var income = await _financeService.GetTotalIncomeAsync();
             var expenses = await _financeService.GetTotalExpensesAsync();
             var balance = income - expenses;
+
+            // Asigură-te că serviciul tău include (.Include(u => u.User)) în interogare
             var payments = await _financeService.GetAllPaymentsAsync();
 
             var model = new FinanceDashboardViewModel
@@ -36,10 +40,11 @@ namespace ArtClub.Controllers
                 TotalExpenses = expenses,
                 NetBalance = balance,
                 HasTheClubEnoughMoney = balance >= 0,
-                RecentTransactions = payments
+                // Trimitem obiectele complete pentru a avea acces la toate proprietățile în View
+                RecentPayments = payments
+                    .OrderByDescending(p => p.Date)
                     .Take(5)
-                    .Select(p => $"{(p.IsIncome ? "Income" : "Expense")} - {p.Amount} lei - {p.Date:dd.MM.yyyy}")
-                    .ToList()
+                        .ToList()
             };
 
             return View("Index", model);
@@ -176,6 +181,43 @@ namespace ArtClub.Controllers
             var report = await _financeService.GenerateMonthlyReportAsync(month, year);
 
             return File(report, "application/pdf", $"Raport-{month:D2}-{year}.pdf");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Pay(int eventId, decimal amount)
+        {
+            // 1. Luăm datele evenimentului (pentru titlu și organizator)
+            var ev = await _eventService.GetEventByIdAsync(eventId);
+            if (ev == null) return NotFound();
+
+            // 2. Marcăm evenimentul ca plătit în baza de date
+            var success = await _eventService.MarkEventAsPaidAsync(eventId);
+
+            if (success)
+            {
+                // 3. ÎNREGISTRĂM PLATA ÎN TABELUL PAYMENTS
+                var paymentEntry = new Payment
+                {
+                    Amount = amount,           // Suma primită (TotalCost de pe front-end)
+                    Date = DateTime.Now,
+                    IsIncome = true,           // Marcăm ca Venit (Banii intră în club)
+                    UserId = ev.OrganizerId,   // Cine a făcut plata
+                    Description = $"Încasare finală eveniment: {ev.Title}"
+                };
+
+                // Apelăm serviciul de finanțe pentru a salva tranzacția
+                await _financeService.CreatePaymentAsync(paymentEntry);
+
+                TempData["StatusMessage"] = $"Plata de {amount} RON a fost înregistrată cu succes!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Eroare la procesarea plății.";
+            }
+
+            // 4. Redirect folosind titlul (pentru a evita eroarea 404 de data trecută)
+            return RedirectToAction("Details", "Event", new { title = ev.Title });
         }
     }
 }

@@ -20,8 +20,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer.HierarchyId": "10.0.7",
           "Microsoft.EntityFrameworkCore.Sqlite": "10.0.7",
           "Microsoft.EntityFrameworkCore.Sqlite.Core": "10.0.7",
-          "PDFsharp": "6.2.4",
-          "PDFSharp.Extensions": "0.1.2.2"
+          "PDFSharp.Extensions": "0.1.2.2",
+          "PDFsharp": "6.2.4"
         },
         "runtime": {
           "ArtClub.dll": {}

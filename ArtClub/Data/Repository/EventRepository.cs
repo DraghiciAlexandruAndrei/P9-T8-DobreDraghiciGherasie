@@ -82,5 +82,15 @@ namespace ArtClub.DataAccess.Repositories
                 .OrderByDescending(e => e.Reservation.StartTime)
                 .ToListAsync();
         }
+
+        public async Task<Event?> GetByIdAsync(int id) => await _context.Events.FindAsync(id);
+
+        public async Task UpdateAsync(Event artEvent)
+        {
+            // Verificăm dacă obiectul este null înainte de actualizare
+            if (artEvent == null) return;
+            // Folosim contextul pentru a marca obiectul ca modificat
+            _context.Events.Update(artEvent);
+        }
     }
 }

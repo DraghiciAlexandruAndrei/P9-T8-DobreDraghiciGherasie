@@ -33,23 +33,21 @@ namespace ArtClub.Services.Implementations
         {
             if (model == null || model.Reservation == null) return false;
 
-            // 1. Verificăm limita de evenimente (REQ-5)
-            // Schimbare: Nu mai facem cast la Member, folosim clasa User direct
             var user = await _userRepo.GetByIdAsync(model.OrganizerId);
             if (user == null) return false;
 
             var currentEvents = await _eventRepo.GetAllWithDetailsAsync();
             var organizerEventsCount = currentEvents.Count(e => e.OrganizerId == model.OrganizerId);
 
-            // Folosim proprietatea EventCreationLimit mutată în clasa User
             if (organizerEventsCount >= user.EventCreationLimit) return false;
 
-            // 2. Calculăm costul estimat
+            // Calculăm costul (Budget-ul devine baza pentru Payment)
             int artCount = model.EventArtPieces?.Count ?? 0;
             int days = (model.Reservation.EndTime - model.Reservation.StartTime).Days;
             if (days <= 0) days = 1;
 
             model.Budget = (days * 300) + (days * artCount * 200);
+            model.IsPaid = false; // Evenimentul începe ca "neplătit" până la apăsarea butonului
 
             try
             {
@@ -58,8 +56,23 @@ namespace ArtClub.Services.Implementations
 
                 if (success)
                 {
+                    // --- LOGICA DE PLATĂ AUTOMATĂ (Income) ---
+                    // Înregistrăm tranzacția, dar evenimentul rămâne IsPaid = false 
+                    // până când cineva confirmă tranzacția prin butonul din UI.
+                    var income = new Payment
+                    {
+                        Amount = model.Budget,
+                        Date = DateTime.Now,
+                        IsIncome = true, // Userul plătește către Club
+                        UserId = model.OrganizerId,
+                        Description = $"Taxă creare eveniment: {model.Title}"
+                    };
+
+                    await _financeService.CreatePaymentAsync(income);
+                    // ------------------------------------------
+
                     await _notificationService.SendEmailAsync(user.Email, "Eveniment Creat",
-                        $"Evenimentul '{model.Title}' a fost creat. Cost estimat: {model.Budget} lei.");
+                        $"Evenimentul '{model.Title}' a fost creat. Taxă datorată: {model.Budget} lei.");
                 }
                 return success;
             }
@@ -177,5 +190,21 @@ namespace ArtClub.Services.Implementations
             // Service-ul doar cere datele de la repository
             return await _eventRepo.GetByOrganizerIdAsync(userId);
         }
+
+        public async Task<Event?> GetEventByIdAsync(int id)
+        {
+            return await _eventRepo.GetByIdAsync(id);
+        }
+
+        public async Task<bool> MarkEventAsPaidAsync(int eventId)
+        {
+            var ev = await _eventRepo.GetByIdAsync(eventId);
+            if (ev == null) return false;
+
+            ev.IsPaid = true; // Presupunând că ai proprietatea IsPaid în entitatea Event
+            return await _eventRepo.SaveChangesAsync();
+        }
+
+        
     }
 }

@@ -66,6 +66,7 @@ namespace ArtClub.Controllers
                 OrganizerName = ev.Organizer?.UserName ?? "Unknown organizer",
                 ResourceName = ev.Resource?.Name ?? "No resource",
                 Date = ev.Reservation?.StartTime ?? DateTime.Now,
+                IsPaid = ev.IsPaid,
                 AttendingCount = ev.Invitations?.Count(i => i.Status == InvitationStatus.Accepted) ?? 0,
                 ArtPieceNames = ev.EventArtPieces?.Select(eap => eap.ArtPiece.Title).ToList() ?? new List<string>(),
                 TotalCost = ev.Budget,
