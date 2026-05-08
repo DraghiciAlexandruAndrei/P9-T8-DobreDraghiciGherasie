@@ -1,49 +1,39 @@
-﻿using ArtClub.DataAccess;
+﻿using ArtClub.DataAccess.Interfaces;
 using ArtClub.Models.Entities;
 using ArtClub.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace ArtClub.Services.Implementations
 {
     public class ArtPieceService : IArtPieceService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IArtPieceRepository _artPieceRepository;
 
-        public ArtPieceService(ApplicationDbContext context)
+        public ArtPieceService(IArtPieceRepository artPieceRepository)
         {
-            _context = context;
+            _artPieceRepository = artPieceRepository;
         }
 
-        public async Task<List<ArtPiece>> GetPopularPiecesAsync()
-        {
-            return await _context.ArtPieces
-                .Where(ap => ap.IsPopular)
-                .ToListAsync();
-        }
+        public async Task<List<ArtPiece>> GetAllArtPiecesAsync() => await _artPieceRepository.GetAllAsync();
 
-        public async Task AddArtPieceToEventAsync(int eventId, int artPieceId)
-        {
-            var eventArtPiece = new EventArtPiece
-            {
-                EventId = eventId,
-                ArtPieceId = artPieceId
-            };
+        public async Task<List<ArtPiece>> GetPopularPiecesAsync() => await _artPieceRepository.GetPopularAsync();
 
-            _context.EventArtPieces.Add(eventArtPiece);
-            await _context.SaveChangesAsync();
-        }
+        public async Task<ArtPiece?> GetArtPieceByIdAsync(int id) => await _artPieceRepository.GetByIdAsync(id);
+
+        public async Task CreateArtPieceAsync(ArtPiece artPiece) => await _artPieceRepository.AddAsync(artPiece);
+
+        public async Task<bool> UpdateArtPieceAsync(ArtPiece artPiece) => await _artPieceRepository.UpdateAsync(artPiece);
+
+        public async Task<bool> DeleteArtPieceAsync(int id) => await _artPieceRepository.DeleteAsync(id);
+
+        public async Task AddArtPieceToEventAsync(int eventId, int artPieceId) =>
+            await _artPieceRepository.AddToEventAsync(eventId, artPieceId);
 
         public async Task<List<ArtPiece>> GetAvailablePiecesForEventAsync(int eventId)
         {
-            // Returnăm piesele care NU sunt deja atribuite acestui eveniment
-            var assignedIds = await _context.EventArtPieces
-                .Where(eap => eap.EventId == eventId)
-                .Select(eap => eap.ArtPieceId)
-                .ToListAsync();
+            var assignedIds = await _artPieceRepository.GetAssignedIdsForEventAsync(eventId);
+            var allPieces = await _artPieceRepository.GetAllAsync();
 
-            return await _context.ArtPieces
-                .Where(ap => !assignedIds.Contains(ap.Id))
-                .ToListAsync();
+            return allPieces.Where(ap => !assignedIds.Contains(ap.Id)).ToList();
         }
     }
 }

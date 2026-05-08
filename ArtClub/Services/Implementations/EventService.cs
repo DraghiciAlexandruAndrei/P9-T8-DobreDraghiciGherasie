@@ -1,112 +1,171 @@
-﻿using ArtClub.DataAccess;
+﻿using ArtClub.DataAccess.Interfaces;
 using ArtClub.Models.Entities;
 using ArtClub.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace ArtClub.Services.Implementations
 {
     public class EventService : IEventService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IEventRepository _eventRepo;
         private readonly IReservationService _reservationService;
         private readonly IFinanceService _financeService;
         private readonly INotificationService _notificationService;
+        private readonly IUserRepository _userRepo;
 
         public EventService(
-            ApplicationDbContext context,
+            IEventRepository eventRepo,
             IReservationService reservationService,
             IFinanceService financeService,
-            INotificationService notificationService)
+            INotificationService notificationService,
+            IUserRepository userRepo)
         {
-            _context = context;
+            _eventRepo = eventRepo;
             _reservationService = reservationService;
             _financeService = financeService;
             _notificationService = notificationService;
+            _userRepo = userRepo;
         }
 
         public async Task<bool> CreateEventAsync(Event model)
         {
-            // 1. Verificăm disponibilitatea resursei (SALA) cu tot cu BUFFER
-            // model.Reservation conține StartTime și EndTime
+            // 1. Validare obiect primire
+            if (model == null || model.Reservation == null) return false;
+
+            // 2. Verificăm disponibilitatea resursei (SALA)
+            // Dacă aici se întoarce false, înseamnă că buffer-ul de 1 zi blochează data aleasă.
             var isAvailable = await _reservationService.CheckAvailabilityAsync(
                 model.ResourceId,
                 model.Reservation.StartTime,
                 model.Reservation.EndTime);
 
-            if (!isAvailable) return false; // Sala e ocupată sau în perioada de buffer
+            if (!isAvailable) return false;
 
-            // 2. Verificăm dacă avem bani pentru acest eveniment (buget proiectat)
+            // 3. Verificăm bugetul clubului
+            // Dacă suma veniturilor din Payments este mai mică decât model.Budget, se va întoarce false.
             var hasFunds = await _financeService.HasClubSufficientFundsAsync(model.Budget);
-            if (!hasFunds) return false; // Clubul e pe minus, nu ne permitem evenimentul
+            if (!hasFunds) return false;
 
-            // 3. Dacă totul e OK, salvăm în baza de date
-            // EF Core va salva automat și obiectul Reservation legat de Event
-            _context.Events.Add(model);
-            var success = await _context.SaveChangesAsync() > 0;
-
-            // 4. Trimitem o notificare automată organizatorului
-            if (success)
+            try
             {
-                var organizer = await _context.Users.FindAsync(model.OrganizerId);
-                await _notificationService.SendEmailAsync(
-                    organizer.Email,
-                    "Eveniment Creat",
-                    $"Evenimentul '{model.Title}' a fost aprobat și programat.");
-            }
+                // 4. Salvare prin Repository
+                // Repository-ul tău folosește _context.AddAsync(artEvent) care urmărește și Rezervarea atașată.
+                await _eventRepo.AddAsync(model);
+                var success = await _eventRepo.SaveChangesAsync();
 
-            return success;
+                // 5. Notificare automată (fără a bloca return-ul dacă eșuează mail-ul)
+                if (success)
+                {
+                    try
+                    {
+                        var organizer = await _userRepo.GetByIdAsync(model.OrganizerId);
+                        if (organizer != null)
+                        {
+                            await _notificationService.SendEmailAsync(
+                                organizer.Email,
+                                "Eveniment Creat",
+                                $"Evenimentul '{model.Title}' a fost aprobat și înregistrat.");
+                        }
+                    }
+                    catch
+                    {
+                        // Log eroare email, dar lăsăm success = true pentru că în DB s-a salvat
+                    }
+                }
+
+                return success;
+            }
+            catch (Exception ex)
+            {
+                // Aici prinzi erori de Foreign Key sau Database Constraints
+                // Poți pune un breakpoint aici să vezi ex.Message
+                return false;
+            }
         }
 
+        // Restul metodelor rămân la fel, fiind deja corect implementate pentru Repository
         public async Task<bool> CancelEventAsync(int eventId)
         {
-            var eventToDelete = await _context.Events
-                .Include(e => e.Reservation) // Ștergem și rezervarea din calendar
-                .FirstOrDefaultAsync(e => e.Id == eventId);
-
+            var eventToDelete = await _eventRepo.GetByIdWithReservationAsync(eventId);
             if (eventToDelete == null) return false;
 
-            _context.Events.Remove(eventToDelete);
-            return await _context.SaveChangesAsync() > 0;
+            _eventRepo.Remove(eventToDelete);
+            return await _eventRepo.SaveChangesAsync();
+        }
+
+        public async Task<List<Event>> GetAllEventsAsync()
+        {
+            return await _eventRepo.GetAllWithDetailsAsync();
+        }
+
+        public async Task<Event?> GetEventByTitleAsync(string title)
+        {
+            return await _eventRepo.GetByTitleWithDetailsAsync(title);
+        }
+
+        public async Task<Resource?> GetResourceByNameAsync(string resourceName)
+        {
+            return await _eventRepo.GetResourceByNameAsync(resourceName);
+        }
+
+        public async Task<bool> UpdateEventAsync(string originalTitle, Event model)
+        {
+            var ev = await _eventRepo.GetByTitleWithDetailsAsync(originalTitle);
+            if (ev == null) return false;
+
+            ev.Title = model.Title;
+            ev.Description = model.Description;
+            ev.ResourceId = model.ResourceId;
+
+            if (ev.Reservation != null && model.Reservation != null)
+            {
+                ev.Reservation.ResourceId = model.Reservation.ResourceId;
+                ev.Reservation.StartTime = model.Reservation.StartTime;
+                ev.Reservation.EndTime = model.Reservation.EndTime;
+            }
+
+            return await _eventRepo.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteEventByTitleAsync(string title)
+        {
+            var ev = await _eventRepo.GetByTitleWithDetailsAsync(title);
+            if (ev == null) return false;
+
+            return await CancelEventAsync(ev.Id);
         }
 
         public async Task SendInvitationAsync(int eventId, int inviteeId)
         {
-            var user = await _context.Users.FindAsync(inviteeId);
-            var ev = await _context.Events.FindAsync(eventId);
+            var user = await _userRepo.GetByIdAsync(inviteeId);
+            var ev = await _eventRepo.GetByIdWithReservationAsync(eventId);
 
             if (user != null && ev != null)
             {
-                // Creăm invitația în DB
                 var invitation = new Invitation { EventId = eventId, InviteeId = inviteeId };
-                _context.Invitations.Add(invitation);
-                await _context.SaveChangesAsync();
-
-                // Notificăm user-ul
-                await _notificationService.SendEmailAsync(
-                    user.Email,
-                    "Invitație Eveniment Artă",
-                    $"Ai fost invitat la {ev.Title}!");
+                await _eventRepo.AddInvitationAsync(invitation);
+                await _eventRepo.SaveChangesAsync();
+                await _notificationService.SendEmailAsync(user.Email, "Invitație", $"Ai fost invitat la {ev.Title}!");
             }
         }
 
         public async Task RespondToInvitationAsync(int invitationId, bool accept)
         {
-            var inv = await _context.Invitations.FindAsync(invitationId);
-
+            var inv = await _eventRepo.GetInvitationByIdAsync(invitationId);
             if (inv != null)
             {
-                // În loc de inv.IsAccepted = accept, folosim logica ta din entitate:
-                if (accept)
-                {
-                    inv.Accept(); // Setează statusul pe Accepted
-                }
-                else
-                {
-                    inv.Decline(); // Setează statusul pe Declined
-                }
-
-                await _context.SaveChangesAsync();
+                if (accept) inv.Accept(); else inv.Decline();
+                await _eventRepo.SaveChangesAsync();
             }
         }
+
+        public async Task<int?> GetDefaultOrganizerIdAsync()
+        {
+            return await _eventRepo.GetFirstUserIdAsync();
+        }
+        public async Task<List<Resource>> GetAllResourcesAsync()
+        {
+            return await _eventRepo.GetAllResourcesAsync(); // Trebuie să existe în IEventRepository
+        }
     }
+
 }

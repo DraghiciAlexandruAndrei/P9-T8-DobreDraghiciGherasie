@@ -1,41 +1,87 @@
 ﻿@model ArtClub.Models.ViewModels.EventCreateViewModel
+
 @{
     ViewData["Title"] = "Create event";
 }
 
-<h1>Create event</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1>Create event</h1>
+        <p class="text-muted mb-0">Schedule a new club event and reserve a resource.</p>
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Back to events</a>
+</div>
 
-<form asp-action="Create" method="post" class="row g-3">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="col-12">
-        <label asp-for="Title" class="form-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" method="post" class="row g-3">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-12">
+                <label asp-for="Title" class="form-label">Title</label>
+                <input asp-for="Title" class="form-control" placeholder="e.g. Spring Exhibition" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="3"
+                          placeholder="Describe the event..."></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="ResourceName" class="form-label">Resource (room/hall)</label>
+                <select asp-for="ResourceName" asp-items="Model.AvailableResources" class="form-select">
+                    <option value="">-- Select a resource --</option>
+                </select>
+                <span asp-validation-for="ResourceName" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="StartDate" class="form-label">Start date & time</label>
+                <input asp-for="StartDate" type="datetime-local" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="EndDate" class="form-label">End date & time</label>
+                <input asp-for="EndDate" type="datetime-local" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            @if (ViewBag.AvailableArtPieces != null)
+            {
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Art pieces to display at this event</label>
+                    <div class="row g-2">
+                        @foreach (var piece in (List<ArtClub.Models.Entities.ArtPiece>)ViewBag.AvailableArtPieces)
+                        {
+                            <div class="col-md-4">
+                                <div class="form-check border rounded p-2">
+                                    <input class="form-check-input" type="checkbox"
+                                           name="SelectedArtPieceIds" value="@piece.Id"
+                                           id="piece_@piece.Id"
+                                           @(Model.SelectedArtPieceIds.Contains(piece.Id) ? "checked" : "") />
+                                    <label class="form-check-label" for="piece_@piece.Id">
+                                        <strong>@piece.Title</strong><br />
+                                        <small class="text-muted">@piece.Creator</small>
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="col-12 d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Create event</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
     </div>
-    <div class="col-12">
-        <label asp-for="Description" class="form-label"></label>
-        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="col-md-6">
-        <label asp-for="StartDate" class="form-label"></label>
-        <input asp-for="StartDate" type="datetime-local" class="form-control" />
-        <span asp-validation-for="StartDate" class="text-danger"></span>
-    </div>
-    <div class="col-md-6">
-        <label asp-for="EndDate" class="form-label"></label>
-        <input asp-for="EndDate" type="datetime-local" class="form-control" />
-        <span asp-validation-for="EndDate" class="text-danger"></span>
-    </div>
-    <div class="col-12">
-        <label asp-for="SelectedResourceId" class="form-label">Resource ID</label>
-        <input asp-for="SelectedResourceId" class="form-control" />
-        <span asp-validation-for="SelectedResourceId" class="text-danger"></span>
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

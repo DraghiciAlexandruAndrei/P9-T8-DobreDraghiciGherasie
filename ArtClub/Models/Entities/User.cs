@@ -10,6 +10,7 @@ namespace ArtClub.Models.Entities
         public string PasswordHash { get; set; }
         public UserRole Role { get; set; }
         public bool IsActive { get; set; }
+        public bool IsBanned { get; set; } = false;
 
         // Navigări
         public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();

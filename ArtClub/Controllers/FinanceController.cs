@@ -1,43 +1,185 @@
-﻿using System.Text;
+﻿using ArtClub.Models.Entities;
+using ArtClub.Models.Enums;
 using ArtClub.Models.ViewModels;
+using ArtClub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArtClub.Controllers
 {
-    public class FinanceController : Controller
+    public class FinanceController : BaseController
     {
-        public IActionResult Index() => Dashboard();
+        private readonly IFinanceService _financeService;
 
-        public IActionResult Dashboard()
+        public FinanceController(IFinanceService financeService)
         {
+            _financeService = financeService;
+        }
+
+        public IActionResult Index()
+        {
+            return RedirectToAction(nameof(Dashboard));
+        }
+
+        public async Task<IActionResult> Dashboard()
+        {
+            var income = await _financeService.GetTotalIncomeAsync();
+            var expenses = await _financeService.GetTotalExpensesAsync();
+            var balance = income - expenses;
+            var payments = await _financeService.GetAllPaymentsAsync();
+
             var model = new FinanceDashboardViewModel
             {
-                TotalIncome = 24500,
-                TotalExpenses = 18200,
-                NetBalance = 6300,
-                HasTheClubEnoughMoney = true,
-                RecentTransactions = new List<string>
-                {
-                    "Membership fee received - 500 lei",
-                    "Resource reservation income - 800 lei",
-                    "Workshop expense - 1200 lei",
-                    "Monthly balance calculated successfully"
-                }
+                TotalIncome = income,
+                TotalExpenses = expenses,
+                NetBalance = balance,
+                HasTheClubEnoughMoney = balance >= 0,
+                RecentTransactions = payments
+                    .Take(5)
+                    .Select(p => $"{(p.IsIncome ? "Income" : "Expense")} - {p.Amount} lei - {p.Date:dd.MM.yyyy}")
+                    .ToList()
             };
 
             return View("Index", model);
         }
 
-        public IActionResult Create() => View();
-
-        public IActionResult Edit(int id) => View();
-
-        public IActionResult Delete(int id) => View();
-
-        public IActionResult GenerateReport(int month, int year)
+        public async Task<IActionResult> Payments()
         {
-            var content = $"ArtClub finance report for {month:D2}/{year}\nIncome: 24500 lei\nExpenses: 18200 lei\nNet balance: 6300 lei\n";
-            return File(Encoding.UTF8.GetBytes(content), "text/plain", $"Raport-{month:D2}-{year}.txt");
+            var payments = await _financeService.GetAllPaymentsAsync();
+            return View(payments);
+        }
+
+        public IActionResult Create()
+        {
+            return View(new Payment
+            {
+                Date = DateTime.Now,
+                IsIncome = true
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(decimal amount, DateTime date, bool isIncome)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                ModelState.AddModelError("", "You must be logged in to create a payment.");
+                return View(new Payment
+                {
+                    Amount = amount,
+                    Date = date,
+                    IsIncome = isIncome
+                });
+            }
+
+            if (amount <= 0)
+            {
+                ModelState.AddModelError("Amount", "Amount must be greater than 0.");
+                return View(new Payment
+                {
+                    Amount = amount,
+                    Date = date,
+                    IsIncome = isIncome
+                });
+            }
+
+            var payment = new Payment
+            {
+                UserId = userId.Value,
+                Amount = amount,
+                Date = date,
+                IsIncome = isIncome,
+                Type = isIncome ? PaymentType.Subscription : PaymentType.Expense
+            };
+
+            await _financeService.CreatePaymentAsync(payment);
+
+            TempData["StatusMessage"] = "Payment created successfully.";
+            return RedirectToAction(nameof(Payments));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var payment = await _financeService.GetPaymentByIdAsync(id);
+
+            if (payment == null)
+                return NotFound();
+
+            return View(payment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, decimal amount, DateTime date, bool isIncome)
+        {
+            var existingPayment = await _financeService.GetPaymentByIdAsync(id);
+
+            if (existingPayment == null)
+                return NotFound();
+
+            if (amount <= 0)
+            {
+                ModelState.AddModelError("Amount", "Amount must be greater than 0.");
+                existingPayment.Amount = amount;
+                existingPayment.Date = date;
+                existingPayment.IsIncome = isIncome;
+                return View(existingPayment);
+            }
+
+            existingPayment.Amount = amount;
+            existingPayment.Date = date;
+            existingPayment.IsIncome = isIncome;
+            existingPayment.Type = isIncome ? PaymentType.Subscription : PaymentType.Expense;
+
+            var success = await _financeService.UpdatePaymentAsync(existingPayment);
+
+            if (!success)
+                return NotFound();
+
+            TempData["StatusMessage"] = "Payment updated successfully.";
+            return RedirectToAction(nameof(Payments));
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var payment = await _financeService.GetPaymentByIdAsync(id);
+
+            if (payment == null)
+                return NotFound();
+
+            return View(payment);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var payment = await _financeService.GetPaymentByIdAsync(id);
+
+            if (payment == null)
+                return NotFound();
+
+            return View(payment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var success = await _financeService.DeletePaymentAsync(id);
+
+            if (!success)
+                return NotFound();
+
+            TempData["StatusMessage"] = "Payment deleted successfully.";
+            return RedirectToAction(nameof(Payments));
+        }
+
+        public async Task<IActionResult> GenerateReport(int month, int year)
+        {
+            var report = await _financeService.GenerateMonthlyReportAsync(month, year);
+
+            return File(report, "application/pdf", $"Raport-{month:D2}-{year}.pdf");
         }
     }
 }
